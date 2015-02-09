@@ -11,13 +11,13 @@
 # under the License.
 
 import mock
-import testtools
-
-from openstack.auth.identity import rackspace
 from openstack import exceptions
 from openstack.tests.auth import common
+import testtools
 
-TEST_URL = 'https://identity.api.rackspacecloud.com/v2.0/'
+from rackspace.auth.identity import rackspace
+
+TEST_URL = "https://identity.api.rackspacecloud.com/v2.0/"
 
 TEST_SERVICE_CATALOG = common.TEST_SERVICE_CATALOG_V2
 TEST_RESPONSE_DICT = common.TEST_RESPONSE_DICT_V2
@@ -27,41 +27,41 @@ class TestRackspaceAuth(testtools.TestCase):
 
     def test_password(self):
         kargs = {
-            'password': common.TEST_PASS,
-            'user_name': common.TEST_USER,
+            "password": common.TEST_PASS,
+            "user_name": common.TEST_USER,
         }
 
         sot = rackspace.Auth(TEST_URL, **kargs)
 
         self.assertEqual(common.TEST_USER, sot.user_name)
         self.assertEqual(common.TEST_PASS, sot.password)
-        expected = {'passwordCredentials': {'password': common.TEST_PASS,
-                                            'username': common.TEST_USER}}
+        expected = {"passwordCredentials": {"password": common.TEST_PASS,
+                                            "username": common.TEST_USER}}
         headers = {}
         self.assertEqual(expected, sot.get_auth_data(headers))
         self.assertEqual({}, headers)
 
     def test_api_key(self):
         kargs = {
-            'api_key': common.TEST_PASS,
-            'user_name': common.TEST_USER,
+            "api_key": common.TEST_PASS,
+            "user_name": common.TEST_USER,
         }
 
         sot = rackspace.Auth(TEST_URL, **kargs)
 
         self.assertEqual(common.TEST_USER, sot.user_name)
         self.assertEqual(common.TEST_PASS, sot.api_key)
-        expected = {'RAX-KSKEY:apiKeyCredentials':
-                    {'apiKey': common.TEST_PASS,
-                     'username': common.TEST_USER}}
+        expected = {"RAX-KSKEY:apiKeyCredentials":
+                    {"apiKey": common.TEST_PASS,
+                     "username": common.TEST_USER}}
         headers = {}
         self.assertEqual(expected, sot.get_auth_data(headers))
         self.assertEqual({}, headers)
 
     def test_empty_token(self):
         kargs = {
-            'token': '',
-            'tenant_id': common.TEST_TENANT_ID,
+            "token": "",
+            "tenant_id": common.TEST_TENANT_ID,
         }
 
         with testtools.ExpectedException(exceptions.AuthorizationFailure):
@@ -69,21 +69,21 @@ class TestRackspaceAuth(testtools.TestCase):
 
     def test_token_with_tenant_id(self):
         kargs = {
-            'tenant_id': common.TEST_TENANT_ID,
-            'token': common.TEST_TOKEN,
+            "tenant_id": common.TEST_TENANT_ID,
+            "token": common.TEST_TOKEN,
         }
-        expected = {'tenantId': common.TEST_TENANT_ID,
-                    'token': {'id': common.TEST_TOKEN}}
+        expected = {"tenantId": common.TEST_TENANT_ID,
+                    "token": {"id": common.TEST_TOKEN}}
         sot = self._test_token(kargs, expected)
         self.assertEqual(common.TEST_TENANT_ID, sot.tenant_id)
 
     def test_token_with_tenant_name(self):
         kargs = {
-            'tenant_name': common.TEST_TENANT_NAME,
-            'token': common.TEST_TOKEN,
+            "tenant_name": common.TEST_TENANT_NAME,
+            "token": common.TEST_TOKEN,
         }
-        expected = {'tenantName': common.TEST_TENANT_NAME,
-                    'token': {'id': common.TEST_TOKEN}}
+        expected = {"tenantName": common.TEST_TENANT_NAME,
+                    "token": {"id": common.TEST_TOKEN}}
         sot = self._test_token(kargs, expected)
         self.assertEqual(common.TEST_TENANT_NAME, sot.tenant_name)
 
@@ -106,46 +106,46 @@ class TestRackspaceAuth(testtools.TestCase):
 
     def test_authorize_tenant_id(self):
         kargs = {
-            'tenant_id': common.TEST_TENANT_ID,
-            'token': common.TEST_TOKEN,
+            "tenant_id": common.TEST_TENANT_ID,
+            "token": common.TEST_TOKEN,
         }
         sot = rackspace.Auth(TEST_URL, **kargs)
         xport = self.create_mock_transport(TEST_RESPONSE_DICT)
 
         resp = sot.authorize(xport)
 
-        eurl = TEST_URL.rstrip('/') + '/tokens'
-        eheaders = {'Content-type': 'application/json'}
-        ejson = {'auth': {'token': {'id': common.TEST_TOKEN},
-                          'tenantId': common.TEST_TENANT_ID}}
+        eurl = TEST_URL.rstrip("/") + "/tokens"
+        eheaders = {"Content-type": "application/json"}
+        ejson = {"auth": {"token": {"id": common.TEST_TOKEN},
+                          "tenantId": common.TEST_TENANT_ID}}
         xport.post.assert_called_with(eurl, headers=eheaders, json=ejson)
-        ecatalog = TEST_RESPONSE_DICT['access'].copy()
-        ecatalog['version'] = 'v2.0'
+        ecatalog = TEST_RESPONSE_DICT["access"].copy()
+        ecatalog["version"] = "v2.0"
         self.assertEqual(ecatalog, resp._info)
 
     def test_authorize_tenant_name(self):
         kargs = {
-            'tenant_name': common.TEST_TENANT_NAME,
-            'token': common.TEST_TOKEN,
+            "tenant_name": common.TEST_TENANT_NAME,
+            "token": common.TEST_TOKEN,
         }
         sot = rackspace.Auth(TEST_URL, **kargs)
         xport = self.create_mock_transport(TEST_RESPONSE_DICT)
 
         resp = sot.authorize(xport)
 
-        eurl = TEST_URL.rstrip('/') + '/tokens'
-        eheaders = {'Content-type': 'application/json'}
-        ejson = {'auth': {'token': {'id': common.TEST_TOKEN},
-                          'tenantName': common.TEST_TENANT_NAME}}
+        eurl = TEST_URL.rstrip("/") + "/tokens"
+        eheaders = {"Content-type": "application/json"}
+        ejson = {"auth": {"token": {"id": common.TEST_TOKEN},
+                          "tenantName": common.TEST_TENANT_NAME}}
         xport.post.assert_called_with(eurl, headers=eheaders, json=ejson)
-        ecatalog = TEST_RESPONSE_DICT['access'].copy()
-        ecatalog['version'] = 'v2.0'
+        ecatalog = TEST_RESPONSE_DICT["access"].copy()
+        ecatalog["version"] = "v2.0"
         self.assertEqual(ecatalog, resp._info)
 
     def test_authorize_bad_response(self):
         kargs = {
-            'token': common.TEST_TOKEN,
-            'tenant_name': common.TEST_TENANT_NAME
+            "token": common.TEST_TOKEN,
+            "tenant_name": common.TEST_TENANT_NAME
         }
         sot = rackspace.Auth(TEST_URL, **kargs)
         xport = self.create_mock_transport({})
@@ -155,12 +155,12 @@ class TestRackspaceAuth(testtools.TestCase):
 
     def test_invalidate(self):
         kargs = {
-            'token': common.TEST_TOKEN,
-            'tenant_name': common.TEST_TENANT_NAME,
+            "token": common.TEST_TOKEN,
+            "tenant_name": common.TEST_TENANT_NAME,
         }
         sot = rackspace.Auth(TEST_URL, **kargs)
-        expected = {'tenantName': common.TEST_TENANT_NAME,
-                    'token': {'id': common.TEST_TOKEN}}
+        expected = {"tenantName": common.TEST_TENANT_NAME,
+                    "token": {"id": common.TEST_TOKEN}}
         headers = {}
         self.assertEqual(expected, sot.get_auth_data(headers))
 
@@ -171,13 +171,13 @@ class TestRackspaceAuth(testtools.TestCase):
 
     def test_valid_options(self):
         expected = [
-            'auth_url',
-            'user_name',
-            'password',
-            'api_key',
-            'token',
-            'tenant_id',
-            'tenant_name',
-            'reauthenticate'
+            "auth_url",
+            "user_name",
+            "password",
+            "api_key",
+            "token",
+            "tenant_id",
+            "tenant_name",
+            "reauthenticate"
         ]
         self.assertEqual(expected, rackspace.Auth.valid_options)
