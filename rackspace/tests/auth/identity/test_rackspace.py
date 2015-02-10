@@ -17,8 +17,6 @@ import testtools
 
 from rackspace.auth.identity import rackspace
 
-TEST_URL = "https://identity.api.rackspacecloud.com/v2.0/"
-
 TEST_SERVICE_CATALOG = common.TEST_SERVICE_CATALOG_V2
 TEST_RESPONSE_DICT = common.TEST_RESPONSE_DICT_V2
 
@@ -31,7 +29,7 @@ class TestRackspaceAuth(testtools.TestCase):
             "user_name": common.TEST_USER,
         }
 
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
 
         self.assertEqual(common.TEST_USER, sot.user_name)
         self.assertEqual(common.TEST_PASS, sot.password)
@@ -47,7 +45,7 @@ class TestRackspaceAuth(testtools.TestCase):
             "user_name": common.TEST_USER,
         }
 
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
 
         self.assertEqual(common.TEST_USER, sot.user_name)
         self.assertEqual(common.TEST_PASS, sot.api_key)
@@ -65,7 +63,7 @@ class TestRackspaceAuth(testtools.TestCase):
         }
 
         with testtools.ExpectedException(exceptions.AuthorizationFailure):
-            rackspace.Auth(TEST_URL, **kargs)
+            rackspace.Auth(**kargs)
 
     def test_token_with_tenant_id(self):
         kargs = {
@@ -88,7 +86,7 @@ class TestRackspaceAuth(testtools.TestCase):
         self.assertEqual(common.TEST_TENANT_NAME, sot.tenant_name)
 
     def _test_token(self, kargs, expected):
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
 
         self.assertEqual(common.TEST_TOKEN, sot.token)
         headers = {}
@@ -109,12 +107,12 @@ class TestRackspaceAuth(testtools.TestCase):
             "tenant_id": common.TEST_TENANT_ID,
             "token": common.TEST_TOKEN,
         }
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
         xport = self.create_mock_transport(TEST_RESPONSE_DICT)
 
         resp = sot.authorize(xport)
 
-        eurl = TEST_URL.rstrip("/") + "/tokens"
+        eurl = rackspace.AUTH_URL.rstrip("/") + "/tokens"
         eheaders = {"Content-type": "application/json"}
         ejson = {"auth": {"token": {"id": common.TEST_TOKEN},
                           "tenantId": common.TEST_TENANT_ID}}
@@ -128,12 +126,12 @@ class TestRackspaceAuth(testtools.TestCase):
             "tenant_name": common.TEST_TENANT_NAME,
             "token": common.TEST_TOKEN,
         }
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
         xport = self.create_mock_transport(TEST_RESPONSE_DICT)
 
         resp = sot.authorize(xport)
 
-        eurl = TEST_URL.rstrip("/") + "/tokens"
+        eurl = rackspace.AUTH_URL.rstrip("/") + "/tokens"
         eheaders = {"Content-type": "application/json"}
         ejson = {"auth": {"token": {"id": common.TEST_TOKEN},
                           "tenantName": common.TEST_TENANT_NAME}}
@@ -147,7 +145,7 @@ class TestRackspaceAuth(testtools.TestCase):
             "token": common.TEST_TOKEN,
             "tenant_name": common.TEST_TENANT_NAME
         }
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
         xport = self.create_mock_transport({})
 
         with testtools.ExpectedException(exceptions.InvalidResponse):
@@ -158,7 +156,7 @@ class TestRackspaceAuth(testtools.TestCase):
             "token": common.TEST_TOKEN,
             "tenant_name": common.TEST_TENANT_NAME,
         }
-        sot = rackspace.Auth(TEST_URL, **kargs)
+        sot = rackspace.Auth(**kargs)
         expected = {"tenantName": common.TEST_TENANT_NAME,
                     "token": {"id": common.TEST_TOKEN}}
         headers = {}

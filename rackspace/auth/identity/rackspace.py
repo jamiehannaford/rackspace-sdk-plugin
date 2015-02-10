@@ -23,6 +23,8 @@ from openstack import exceptions
 
 _logger = logging.getLogger(__name__)
 
+AUTH_URL = "https://identity.api.rackspacecloud.com/v2.0/"
+
 
 class Auth(base.BaseIdentityPlugin):
 
@@ -38,8 +40,8 @@ class Auth(base.BaseIdentityPlugin):
         "reauthenticate"
     ]
 
-    def __init__(self, auth_url, user_name=None, password="", api_key="",
-                 token=None, tenant_id=None, tenant_name=None,
+    def __init__(self, auth_url=AUTH_URL, user_name=None, password="",
+                 api_key="", token=None, tenant_id=None, tenant_name=None,
                  reauthenticate=True):
 
         super(Auth, self).__init__(auth_url=auth_url,
