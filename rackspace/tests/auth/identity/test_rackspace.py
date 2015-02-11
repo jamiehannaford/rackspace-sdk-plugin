@@ -11,10 +11,9 @@
 # under the License.
 
 import mock
-import testtools
-
 from openstack import exceptions
 from openstack.tests.auth import common
+import testtools
 
 from rackspace.auth.identity import rackspace
 
