@@ -11,7 +11,6 @@
 # under the License.
 
 import mock
-
 from openstack.object_store.v1 import container
 from openstack import session
 from openstack.tests import fakes
