@@ -1,1 +1,1 @@
-python-openstacksdk
+-e git+git://github.com/stackforge/python-openstacksdk.git#egg=python-openstacksdk
