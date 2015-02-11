@@ -16,7 +16,6 @@ TODO
 """
 
 import logging
-
 from openstack.auth import access
 from openstack.auth.identity import base
 from openstack import exceptions
