@@ -22,7 +22,7 @@ stored in Cloud Files within the IAD datacenter. ::
 
    conn = connection.Connection(preference=pref,
                                 auth_plugin="rackspace",
-                                user_name="my_user",
+                                username="my_user",
                                 api_key="123abc456def789ghi")
 
    for container in conn.object_store.containers():
