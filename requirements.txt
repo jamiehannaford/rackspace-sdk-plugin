@@ -1,1 +1,2 @@
-python-openstacksdk>=0.3
+six
+python-openstacksdk>=0.4
