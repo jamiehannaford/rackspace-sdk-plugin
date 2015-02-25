@@ -14,10 +14,8 @@
 Rackspace authorization plugins.
 """
 
-import abc
 import logging
 
-from openstack.auth import access
 from openstack.auth.identity import discoverable
 from openstack.auth.identity import v2
 from openstack import exceptions
@@ -54,7 +52,9 @@ class Discoverable(discoverable.Auth):
     #: Valid options for this plugin
     valid_options = list(set(PASSWORD_OPTIONS + TOKEN_OPTIONS))
 
-    def __init__(self, auth_url=AUTH_URL, reauthenticate=True, **auth_args):
+    def __init__(self, auth_url=AUTH_URL, reauthenticate=True,
+                 project_id=None, tenant_id=None,
+                 project_name=None, tenant_name=None, **auth_args):
         """Construct an Identity Authentication Plugin.
 
         This authorization plugin should be constructed with an auth_url
@@ -72,6 +72,13 @@ class Discoverable(discoverable.Auth):
         self.access_info = None
         self.reauthenticate = reauthenticate
 
+        self.tenant_id = project_id
+        if not self.tenant_id:
+            self.tenant_id = tenant_id
+        self.tenant_name = project_name
+        if not self.tenant_name:
+            self.tenant_name = tenant_name
+
         if auth_args.get('token'):
             plugin = Token
         else:
@@ -80,6 +87,9 @@ class Discoverable(discoverable.Auth):
         valid_list = plugin.valid_options
         args = dict((n, auth_args[n]) for n in valid_list if n in auth_args)
         self.auth_plugin = plugin(auth_url, **args)
+
+
+class Auth(v2.Auth):
 
     def invalidate(self):
         """Invalidate the current authentication data."""
@@ -90,7 +100,7 @@ class Discoverable(discoverable.Auth):
         return False
 
 
-class Password(v2.Auth):
+class Password(Auth):
 
     #: Valid options for Password plugin
     valid_options = PASSWORD_OPTIONS
@@ -118,7 +128,8 @@ class Password(v2.Auth):
         super(Password, self).__init__(auth_url=auth_url, **kwargs)
 
         if username is None:
-            raise ValueError("You must specify a username")
+            raise exceptions.AuthorizationFailure(
+                "You must specify a username")
 
         self.username = username
         self.password = password
@@ -131,11 +142,11 @@ class Password(v2.Auth):
             return {"passwordCredentials": {
                     "username": self.username, "password": self.password}}
         elif self.api_key:
-             return {"RAX-KSKEY:apiKeyCredentials": {
-                     "username": self.username, "apiKey": self.api_key}}
+            return {"RAX-KSKEY:apiKeyCredentials": {
+                    "username": self.username, "apiKey": self.api_key}}
 
 
-class Token(v2.Auth):
+class Token(Auth):
 
     #: Valid options for Token plugin
     valid_options = TOKEN_OPTIONS
@@ -153,15 +164,13 @@ class Token(v2.Auth):
         """
         super(Token, self).__init__(auth_url=auth_url, **kwargs)
 
-        if token is None:
-            raise Exception("You must specify a token")
+        if not token:
+            raise exceptions.AuthorizationFailure("You must specify a token")
 
-        if all([tenant_name, tenant_id]):
-            raise ValueError(
+        if all([self.tenant_name, self.tenant_id]):
+            raise exceptions.AuthorizationFailure(
                 "You cannot specify both a tenant_name and tenant_id")
 
-        self.tenant_id = tenant_id
-        self.tenant_name = tenant_name
         self.token = token
 
     def get_auth_data(self, headers=None):
