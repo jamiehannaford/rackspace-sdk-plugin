@@ -10,15 +10,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack import user_preference
+from openstack import profile
 
 from rackspace.object_store import object_store_service
 
 
-class UserPreference(user_preference.UserPreference):
+class Profile(profile.Profile):
 
     def __init__(self):
-        super(UserPreference, self).__init__()
+        super(Profile, self).__init__()
 
         # Override with our implementation for Cloud Files
         cloud_files = object_store_service.ObjectStoreService()
