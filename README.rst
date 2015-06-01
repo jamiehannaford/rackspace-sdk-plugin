@@ -15,12 +15,12 @@ The following example connects to the Rackspace cloud and lists containers
 stored in Cloud Files within the IAD datacenter. ::
 
    from openstack import connection
-   from rackspace import user_preference
+   from rackspace import profile
 
-   pref = user_preference.UserPreference()
-   pref.set_region(pref.ALL, "IAD")
+   prof = profile.Profile()
+   prof.set_region(prof.ALL, "IAD")
 
-   conn = connection.Connection(preference=pref,
+   conn = connection.Connection(profile=prof,
                                 auth_plugin="rackspace",
                                 username="my_user",
                                 api_key="123abc456def789ghi")
@@ -39,8 +39,8 @@ http://python-openstacksdk.readthedocs.org/en/latest/
 Requirements
 ------------
 
-* Python 2.6+, Python 3.3+
-* python-openstacksdk
+* Python 2.7+, Python 3.3+
+* python-openstacksdk>=0.5
 
 License
 -------
@@ -49,6 +49,11 @@ Apache 2.0
 
 Release Notes
 =============
+
+0.2.0
+-----
+
+* Changed UserPreference to Profile as was done in version 0.5 of the SDK.
 
 0.1.0
 -----
