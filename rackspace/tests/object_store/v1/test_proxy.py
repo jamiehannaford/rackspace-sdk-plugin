@@ -13,8 +13,8 @@
 import mock
 from openstack.object_store.v1 import container
 from openstack import session
-from openstack.tests import fakes
-from openstack.tests import test_proxy_base
+from openstack.tests.unit import fakes
+from openstack.tests.unit import test_proxy_base
 from openstack import transport
 
 from rackspace.object_store.v1 import _proxy

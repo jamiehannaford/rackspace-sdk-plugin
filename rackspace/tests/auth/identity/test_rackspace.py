@@ -12,7 +12,7 @@
 
 import mock
 from openstack import exceptions
-from openstack.tests.auth import common
+from openstack.tests.unit.auth import common
 import testtools
 
 from rackspace.auth.identity import rackspace
