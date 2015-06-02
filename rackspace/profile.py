@@ -13,6 +13,7 @@
 from openstack import profile
 
 from rackspace.object_store import object_store_service
+from rackspace.message import message_service
 
 
 class Profile(profile.Profile):
@@ -24,3 +25,8 @@ class Profile(profile.Profile):
         cloud_files = object_store_service.ObjectStoreService()
         cloud_files.set_visibility(None)
         self._services[cloud_files.service_type] = cloud_files
+
+        # Override with our implementation for Cloud Queues
+        cloud_queues = message_service.MessageService()
+        cloud_queues.set_visibility(None)
+        self._services["messaging"] = cloud_queues
