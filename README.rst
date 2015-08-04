@@ -15,9 +15,9 @@ The following example connects to the Rackspace cloud and lists containers
 stored in Cloud Files within the IAD datacenter. ::
 
    from openstack import connection
-   from rackspace import profile
+   from openstack import profile
 
-   prof = profile.Profile()
+   prof = profile.Profile(extensions=["rackspace"])
    prof.set_region(prof.ALL, "IAD")
 
    conn = connection.Connection(profile=prof,
