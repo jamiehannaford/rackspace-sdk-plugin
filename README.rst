@@ -11,19 +11,13 @@ with the
 Usage
 -----
 
-The following example connects to the Rackspace cloud and lists containers
-stored in Cloud Files within the IAD datacenter. ::
+The following example connects to the Rackspace Public Cloud and lists
+containers stored in Cloud Files within the IAD datacenter. ::
 
-   from openstack import connection
-   from openstack import profile
-
-   prof = profile.Profile(extensions=["rackspace"])
-   prof.set_region(prof.ALL, "IAD")
-
-   conn = connection.Connection(profile=prof,
-                                auth_plugin="rackspace",
-                                username="my_user",
-                                api_key="123abc456def789ghi")
+   from rackspace import connection
+   conn = connection.Connection(username="my_user",
+                                api_key="123abc456def789ghi",
+                                region="IAD")
 
    for container in conn.object_store.containers():
        print(container.name)
@@ -39,8 +33,8 @@ http://python-openstacksdk.readthedocs.org/en/latest/
 Requirements
 ------------
 
-* Python 2.7+, Python 3.3+
-* python-openstacksdk>=0.5
+* Python 2.7+, Python 3.4+
+* python-openstacksdk>=0.6
 
 License
 -------
