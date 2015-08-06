@@ -12,6 +12,7 @@
 
 from openstack.message.v1 import _proxy
 from openstack.message.v1 import queue
+
 from rackspace.message import message_service
 
 queue.Queue.service = message_service.MessageService()
