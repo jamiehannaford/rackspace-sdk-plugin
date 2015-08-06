@@ -41,26 +41,4 @@ License
 
 Apache 2.0
 
-Release Notes
-=============
-
-0.2.0
------
-
-* Changed UserPreference to Profile as was done in version 0.5 of the SDK.
-
-0.1.0
------
-
-* Changed plugin style to match OpenStack SDK's shift to python-keystoneclient
-  styled authentication plugins.
-
-.. note:: This release is incompatible with 0.0.1. The ``user_name``
-          authentication parameter has changed to ``username``.
-
-0.0.1
------
-
-* Initial release
-* Support for password, API key, and token authentication
-* Support for Cloud Files Bulk Delete
+.. include:: ChangeLog
