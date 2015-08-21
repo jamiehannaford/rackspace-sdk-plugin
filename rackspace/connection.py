@@ -16,8 +16,7 @@ from openstack import profile as _profile
 
 class Connection(connection.Connection):
 
-    def __init__(self, region=None, auth_plugin="rackspace", profile=None,
-                 **kwargs):
+    def __init__(self, region=None, profile=None, **kwargs):
         """Create a connection to the Rackspace Public Cloud
 
         This is a subclass of :class:`openstack.connection.Connection` that
@@ -31,13 +30,13 @@ class Connection(connection.Connection):
         :raises: ValueError if no `region` is specified.
         """
         if profile is None:
-            profile = _profile.Profile(extensions=["rackspace"])
+            profile = _profile.Profile(plugins=["rackspace"])
 
         if region is None:
             raise ValueError("You must specify a region to work with.")
 
         profile.set_region(profile.ALL, region)
 
-        super(Connection, self).__init__(auth_plugin=auth_plugin,
+        super(Connection, self).__init__(auth_plugin="rackspace",
                                          profile=profile,
                                          **kwargs)
