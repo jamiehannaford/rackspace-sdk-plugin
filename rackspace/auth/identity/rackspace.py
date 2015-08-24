@@ -16,6 +16,17 @@ Rackspace authorization plugins.
 
 import logging
 
+# NOTE: The following two lines disable warning messages coming out of the
+# urllib3 that is vendored by requests. This is currently necessary to
+# silence a warning about an issue with the certificate in our identity
+# environment. The certificate is missing a subjectAltName, and urllib3
+# is warning that the fallback to check the commonName is something that is
+# soon to be unsupported. The Rackspace Identity team has been working on
+# a solution to this issue, and the environment is slated to be upgraded
+# by end of year 2015.
+import requests
+requests.packages.urllib3.disable_warnings()
+
 from openstack.auth.identity import discoverable
 from openstack.auth.identity import v2
 from openstack import exceptions
