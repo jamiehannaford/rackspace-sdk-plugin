@@ -14,12 +14,12 @@ from openstack.auth import service_filter
 
 
 class BackupService(service_filter.ServiceFilter):
-    """The backup service."""
+    """The file-based backup service."""
 
     valid_versions = [service_filter.ValidVersion('v1', path='v1.0')]
 
     def __init__(self, version=None):
-        """Create an backup service."""
+        """Create a file-based backup service."""
 
         super(BackupService, self).__init__(service_type="rax:backup",
                                             service_name="cloudBackup",

@@ -24,25 +24,30 @@ class Activity(resource.Resource):
 
     # Properties
     #: Indicates the backup configuration ID for a backup
-    backup_configuration = resource.prop('ParentId')
+    backup_configuration_id = resource.prop('ParentId')
     #: Specifies the backup ID associated with a restore
     backup_id = resource.prop('BackupId')
     #: Indicates the machine agent ID of the source system
     destination_agent_id = resource.prop('DestinationMachineAgentId')
-    #: Indicates the machine agent ID of the source system
+    #: Indicates the machine agent name of the source system
     destination_agent_name = resource.prop('DestinationMachineName')
+    #: Indicates if the backup configuration is deleted. Valid values are:
+    #: ``true`` or ``false``.
+    is_backup_configuration_deleted = resource.prop(
+        'IsBackupConfigurationDeleted')
     #: Indicates the backup name or restore name
     name = resource.prop('DisplayName')
     #: Indicates the machine agent ID of the source system
     source_agent_id = resource.prop('SourceMachineAgentId')
-    #: Indicates the machine agent ID of the source system
+    #: Indicates the machine agent name of the source system
     source_agent_name = resource.prop('SourceMachineName')
     #: Indicates the current state. Valid values are:
-    #: Creating, Queued, InProgress, Completed, Stopped, Failed,
-    #: startRequested, Stoprequested, Completed WithErrors, and Preparing.
+    #: ``Creating``, ``Queued``, ``InProgress``, ``Completed``, ``Stopped``,
+    #: ``Failed``, ``startRequested``, ``Stoprequested```
+    #: ``Completed WithErrors``, and ``Preparing``.
     status = resource.prop('CurrentState')
-    #: Indicates the time of the activity
-    time = resource.prop('TimeOfActivity')
-    #: Specifies type of activity.
-    #: Valid values are Restore, Backup, or Cleanup.
+    #: Indicates the timestamp of the activity
+    timestamp = resource.prop('TimeOfActivity')
+    #: Specifies type of activity. Valid values include:
+    #: ``Restore``, ``Backup``, or ``Cleanup``.
     type = resource.prop('Type')

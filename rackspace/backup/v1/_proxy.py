@@ -77,7 +77,7 @@ class Proxy(proxy.BaseProxy):
                            comprised of the properties on the
                            BackupConfiguration class.
         :returns: The results of backup_configuration creation
-        :rtype: :class:``~rackspace.backup.v1.backup_configuration
+        :rtype: :class:`~rackspace.backup.v1.backup_configuration
                                              .BackupConfiguration`
         """
         return self._create(backup_configuration.BackupConfiguration,
@@ -152,7 +152,7 @@ class Proxy(proxy.BaseProxy):
                            comprised of the properties on the
                            RestoreConfiguration class.
         :returns: The results of restore_configuration creation
-        :rtype: :class:``~rackspace.backup.v1.restore_configuration
+        :rtype: :class:`~rackspace.backup.v1.restore_configuration
                                              .RestoreConfiguration`
         """
         return self._create(restore_configuration.RestoreConfiguration,
