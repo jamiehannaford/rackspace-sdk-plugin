@@ -57,7 +57,7 @@ class Agent(resource.Resource):
     server_os = resource.prop('OperatingSystem')
     #: Operating system version of server
     server_os_version = resource.prop('OperatingSystemVersion')
-    #: Server UUID of the host server where the Cloud Backup agent is running
+    #: The server ID of the host server where the Cloud Backup agent is running
     server_uuid = resource.prop('HostServerId')
     #: Indicates if the Cloud Backup agent is using Rackspace's ServiceNet
     #: to backup data to Cloud Files. Valid values are:
@@ -100,6 +100,7 @@ class Agent(resource.Resource):
         :param session: The session to use for making this request.
         :param str secret: Encrypted passphrase
         :type session: :class:`~openstack.session.Session`
+        :returns: ``str``
         """
         body = {'MachineAgentId': self.id, 'EncryptedPasswordHex': secret}
         url = utils.urljoin('agent', 'encrypt')
@@ -174,6 +175,7 @@ class Agent(resource.Resource):
         :param str oldsecret: Old encrypted passphrase.
         :param str newsecret: New encrypted passphrase.
         :type session: :class:`~openstack.session.Session`
+        :returns: ``str``
         """
         body = {'MachineAgentId': self.id,
                 'OldEncryptedPasswordHex': oldsecret,

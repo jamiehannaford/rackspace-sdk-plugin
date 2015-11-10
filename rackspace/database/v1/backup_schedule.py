@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+from openstack.database.v1 import instance
 from openstack import resource
 from rackspace.database import database_service
 
@@ -26,3 +27,27 @@ class BackupSchedule(resource.Resource):
     allow_list = True
     allow_retrieve = True
     allow_update = True
+
+    # Properties
+    #: Action (backup)
+    action = resource.prop('action')
+    #: Creation time
+    created_at = resource.prop('created')
+    #: Last scheduled run
+    last_run = resource.prop('last_scheduled')
+    #: Next scheduled run
+    next_run = resource.prop('next_run')
+    #: The instance ID of the source
+    source_instance = resource.prop('instance_id', type=instance.Instance)
+    #: Scheduled day of the month
+    start_day_of_month_at = resource.prop('day_of_month')
+    #: Scheduled day of the week
+    start_day_of_week_at = resource.prop('day_of_week')
+    #: Scheduled hour of the day
+    start_hour_at = resource.prop('hour')
+    #: Scheduled minute of the hour
+    start_minute_at = resource.prop('minute')
+    #: Scheduled month of the year
+    start_month_at = resource.prop('month')
+    #: Update time
+    updated_at = resource.prop('updated')

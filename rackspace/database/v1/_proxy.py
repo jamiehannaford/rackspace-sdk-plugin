@@ -19,6 +19,7 @@ from openstack.database.v1 import user
 from rackspace.database import database_service
 from rackspace.database.v1 import backup
 from rackspace.database.v1 import backup_schedule
+from rackspace.database.v1 import ha
 
 
 database.Database.service = database_service.DatabaseService()
@@ -182,3 +183,83 @@ class Proxy(_proxy.Proxy):
         :rtype: :class:`~rackspace.database.v1.backup_schedule.BackupSchedule`
         """
         return self._update(backup_schedule.BackupSchedule, value, **attrs)
+
+    def ha_instances(self, **query):
+        """Return a generator of high availability instances
+
+        :param kwargs \*\*query: Optional query parameters to be sent to limit
+                                 the resources being returned.
+        :returns: A generator of high availability instances objects
+
+        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        """
+        return self._list(ha.HA,
+                          paginated=False, **query)
+
+    def create_ha_instance(self, **attrs):
+        """Create a new high availability instance from attributes
+
+        :param dict attrs: Keyword arguments which will be used to create a
+                           :class:`~rackspace.database.v1.ha.HA`,
+                           comprised of the properties on the HA class.
+        :returns: The results of high availability instance creation
+
+        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        """
+        return self._create(ha.HA, **attrs)
+
+    def delete_ha_instance(self, value, ignore_missing=True):
+        """Delete a high availability instance
+
+        :param value: The value can be either the ID of a backup schedule or
+                      a :class:`~rackspace.database.v1.ha.HA` instance.
+        :param bool ignore_missing: When set to ``False``
+                :class:`~openstack.exceptions.ResourceNotFound` will be raised
+                when the high availability instance does not exist. When set
+                to ``True``, no exception will be set when attempting to
+                delete a nonexistent high availability instance.
+
+        :returns: ``None``
+        """
+        self._delete(ha.HA, value,
+                     ignore_missing=ignore_missing)
+
+    def find_ha_instance(self, name_or_id, ignore_missing=True):
+        """Find a single high availability instance
+
+        :param name_or_id: The name or ID of a high availability instance.
+        :param bool ignore_missing: When set to ``False``
+                    :class:`~openstack.exceptions.ResourceNotFound` will be
+                    raised when the resource does not exist. When set to
+                    ``True``, None will be returned when attempting to find
+                    a nonexistent resource.
+
+        :returns: One :class:`~rackspace.database.v1.ha.HA` or None
+        """
+        return ha.HA.find(
+            self.session, name_or_id, ignore_missing=ignore_missing)
+
+    def get_ha_instance(self, value):
+        """Get a single high availability instance
+
+        :param value: The value can be the ID of a high availability instance
+                      or a :class:`~rackspace.database.v1.ha.HA` instance.
+
+        :returns: One :class:`~rackspace.database.v1.ha.HA`
+        :raises: :class:`~openstack.exceptions.ResourceNotFound`
+                 when no resource can be found.
+        """
+        return self._get(ha.HA, value)
+
+    def update_ha_instance(self, value, **attrs):
+        """Update a high availability instance
+
+        :param value: Either the id of a high availability instance instance
+                      or a :class:`~rackspace.database.v1.ha.HA` instance.
+        :attrs kwargs: The attributes to update on the instance represented
+                       by ``value``.
+
+        :returns: The updated high availability instance
+        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        """
+        return self._update(ha.HA, value, **attrs)

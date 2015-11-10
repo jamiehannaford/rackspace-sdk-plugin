@@ -29,7 +29,7 @@ class BackupConfiguration(resource.Resource):
     # Properties
     #: ID that uniquely identifies a Cloud Backup agent
     agent_id = resource.prop('MachineAgentId')
-    #: Indicates the list of files and folders not to back up. *Type: list*
+    #: List of files and folders not to back up. *Type: list*
     exclusions = resource.prop('Exclusions', type=list)
     #: Type of server. Valid values are:
     #: ``RaxCloudServer``: Rackspace Cloud Servers
@@ -37,7 +37,7 @@ class BackupConfiguration(resource.Resource):
     #: Frequency of backup schedule. Valid values are:
     #: ``Manually``, ``Hourly``, ``Daily``, and ``Weekly``.
     frequency = resource.prop('Frequency')
-    #: Indicates the list of files and folders to back up. *Type: list*
+    #: List of files and folders to back up. *Type: list*
     inclusions = resource.prop('Inclusions', type=list)
     #: Indicates if a backup configuration is active. Valid values are:
     #: ``true`` or ``false``.
@@ -48,11 +48,15 @@ class BackupConfiguration(resource.Resource):
     #: Indicates if backups are encrypted. Valid values are:
     #: ``true`` or ``false``.
     is_encrypted = resource.prop('IsEncrypted')
-    #: Indicates the hour if frequency is set to ``Hourly``. Valid values are:
+    #: AM or PM time for manual and hourly backups. Valid values are:
+    #: ``AM`` or ``PM``
+    #: ``null``: if frequency value is ``Manually`` ,``Hourly``.
+    hour_am_pm_at = resource.prop('StartTimeAmPm')
+    #: The hour if frequency is set to ``Hourly``. Valid values are:
     #: ``1`` through ``23``
     #: ``null``: if frequency value is ``Manually``, ``Daily``, or ``Weekly``.
     hourly_at = resource.prop('HourInterval')
-    #: The name of the backup configuration. The configuration typically has
+    #: The name of the backup configuration. Configurations typically have
     #: the backup schedule, files to backup, and notification options.
     name = resource.prop('BackupConfigurationName')
     #: Notify after a failed backup. Valid values are:
@@ -61,31 +65,29 @@ class BackupConfiguration(resource.Resource):
     #: Notify after a successful backup. Valid values are:
     #: ``true`` or ``false``.
     notify_on_success = resource.prop('NotifyFailure')
-    #: Indicates the email address to notify
+    #: The email address to notify
     notify_to = resource.prop('NotifyRecipients')
     #: Specifies when to send notification. Valid values are:
     #: ``1``: Notifications are sent as soon as possible
     #: ``2``: Notifications are sent at the next scheduled time
-    notify_when = resource.prop('MissedBackupActionId')
+    notify_when = resource.prop('MissedBackupActionId', type=int)
     #: Indicates how many days backup revisions are maintained. Valid values:
     #: ``0``, ``30`` , and ``60``. ``0`` means indefinite.
     retention = resource.prop('VersionRetention')
     #: ID that uniquely identifies a Cloud Backup schedule
     schedule = resource.prop('BackupConfigurationScheduleId')
-    #: Indicates AM or PM time for manual and hourly backups. Valid values are:
-    #: ``AM`` or ``PM``
-    #: ``null``: if frequency value is ``Manually`` ,``Hourly``.
-    start_am_pm_at = resource.prop('StartTimeAmPm')
-    #: Indicates the day of the week. Valid values are:
+    #: The day of the week if frequency is set to ``Hourly``. Valid values are:
     #: ``0`` through ``6``: with ``0`` representing ``Sunday``
     #:                      and ``6`` representing ``Saturday``
     #: ``null``: if frequency value is ``Manually``, ``Daily``, or ``Weekly``.
     start_day_of_week_at = resource.prop('DayOfWeekId')
-    #: Indicates the hour when the backup runs. Valid values are:
+    #: The hour when the backup runs if frequency is
+    #: set to ``Daily`` or ``Weekly``. Valid values are:
     #: ``1`` through ``12``
     #: ``null``: if frequency value is ``Manually`` or ``Hourly``.
     start_hour_at = resource.prop('StartTimeHour')
-    #: Indicates the hour when the backup runs. Valid values are:
+    #: The hour when the backup runs if frequency is
+    #: set to ``Daily`` or ``Weekly``. Valid values are:
     #: ``0`` through ``59``
     #: ``null``: if frequency value is ``Manually`` or ``Hourly``.
     start_minute_at = resource.prop('StartTimeHour')

@@ -92,6 +92,7 @@ class TestBackupConfiguration(testtools.TestCase):
         self.assertEqual(EXAMPLE['IsActive'], sot.is_active)
         self.assertEqual(EXAMPLE['IsDeleted'], sot.is_deleted)
         self.assertEqual(EXAMPLE['IsEncrypted'], sot.is_encrypted)
+        self.assertEqual(EXAMPLE['StartTimeAmPm'], sot.hour_am_pm_at)
         self.assertEqual(EXAMPLE['HourInterval'], sot.hourly_at)
         self.assertEqual(EXAMPLE['BackupConfigurationName'], sot.name)
         self.assertEqual(EXAMPLE['NotifySuccess'], sot.notify_on_failure)
@@ -101,7 +102,6 @@ class TestBackupConfiguration(testtools.TestCase):
         self.assertEqual(EXAMPLE['VersionRetention'], sot.retention)
         self.assertEqual(EXAMPLE['BackupConfigurationScheduleId'],
                          sot.schedule)
-        self.assertEqual(EXAMPLE['StartTimeAmPm'], sot.start_am_pm_at)
         self.assertEqual(EXAMPLE['DayOfWeekId'], sot.start_day_of_week_at)
         self.assertEqual(EXAMPLE['StartTimeHour'], sot.start_hour_at)
         self.assertEqual(EXAMPLE['StartTimeHour'], sot.start_minute_at)

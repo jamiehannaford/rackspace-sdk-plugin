@@ -14,6 +14,7 @@ from openstack.tests.unit import test_proxy_base
 from rackspace.database.v1 import _proxy
 from rackspace.database.v1 import backup
 from rackspace.database.v1 import backup_schedule
+from rackspace.database.v1 import ha
 
 
 class TestDatabaseProxy(test_proxy_base.TestProxyBase):
@@ -68,3 +69,25 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
     def test_backup_schedule_update(self):
         self.verify_update(self.proxy.update_backup_schedule,
                            backup_schedule.BackupSchedule)
+
+    def test_ha_instances(self):
+        self.verify_list(self.proxy.ha_instances, ha.HA, paginated=False)
+
+    def test_ha_instance_create(self):
+        self.verify_create(self.proxy.create_ha_instance, ha.HA)
+
+    def test_ha_instance_delete(self):
+        self.verify_delete(self.proxy.delete_ha_instance, ha.HA, False)
+
+    def test_ha_instance_delete_ignore(self):
+        self.verify_delete(self.proxy.delete_ha_instance, ha.HA, True)
+
+    def test_ha_instance_find(self):
+        self.verify_find('rackspace.database.v1.ha.HA.find',
+                         self.proxy.find_ha_instance)
+
+    def test_ha_instance_get(self):
+        self.verify_get(self.proxy.get_ha_instance, ha.HA)
+
+    def test_ha_instance_update(self):
+        self.verify_update(self.proxy.update_ha_instance, ha.HA)

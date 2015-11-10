@@ -26,13 +26,13 @@ class RestoreConfiguration(resource.Resource):
     # Properties
     #: ID that uniquely identifies a Cloud Backup agent
     agent_id = resource.prop('MachineAgentId')
-    #: Cloud Backup agent's name
+    #: The name of the Cloud Backup agent
     agent_name = resource.prop('BackupMachineName')
-    #: Indicates the backup configuration ID for a backup
+    #: ID that uniquely identifies a backup configuration
     backup_configuration_id = resource.prop('BackupConfigurationId')
-    #: Indicates the backup configuration name for a backup
+    #: The name of the backup configuration
     backup_configuration_name = resource.prop('BackupConfigurationName')
-    #: Identifies a unique backup
+    #: ID that uniquely identifies a backup
     backup_id = resource.prop('BackupId')
     #: Indicates if files are overwritten. Valid values are:
     #: ``true`` or ``false``.
@@ -41,7 +41,8 @@ class RestoreConfiguration(resource.Resource):
     #: responsible for creating the backup, that is being used for the restore,
     #: is or was located (the source machine does not have to be online).
     datacenter = resource.prop('BackupDataCenter')
-    #: Identifies the machine to which you want the backups to restore
+    #: ID that uniquely identifies the machine
+    #: to which you want the backups to restore
     destination_agent_id = resource.prop('DestinationMachineId')
     #: Name of the machine to which you want the backups to restore
     destination_agent_name = resource.prop('DestinationMachineName')
@@ -50,23 +51,23 @@ class RestoreConfiguration(resource.Resource):
     #: Encrypted password. Valid values are:
     #: ``null`` or ``string``.
     encrypted_password = resource.prop('EncryptedPassword')
-    #: Indicates the list of files and folders not to back up. *Type: list*
+    #: List of files and folders not to back up. *Type: list*
     exclusions = resource.prop('Exclusions', type=list)
     #: Type of server. Valid values are:
     #: ``RaxCloudServer``: Rackspace Cloud Servers
     flavor = resource.prop('BackupFlavor')
-    #: Indicates the list of files and folders to back up. *Type: list*
+    #: List of files and folders to back up. *Type: list*
     inclusions = resource.prop('Inclusions', type=list)
     #: Indicates if backups are encrypted. Valid values are:
     #: ``true`` or ``false``.
     is_encrypted = resource.prop('IsEncrypted')
     #: Public key of the public/private encryption key pair
     public_key = resource.prop('PublicKey')
-    #: Identifies a restore configuration
+    #: ID that uniquely identifies a restore configuration
     restore_id = resource.prop('RestoreId')
-    #: Identifies the machine where your backup was originally made
+    #: ID that uniquely identifies the machine where backup was originally made
     source_agent_id = resource.prop('BackupMachineId')
-    #: Indicates the current state. Valid values are:
+    #: Status of the restore operation. Valid values are:
     #: ``0``: Creating
     #: ``1``: Queued
     #: ``2``: InProgress
@@ -78,5 +79,5 @@ class RestoreConfiguration(resource.Resource):
     #: ``8 `: Completed WithErrors
     #: ``9 `: Preparing
     status = resource.prop('RestoreStateId')
-    #: Indicates the timestamp of the backup
+    #: Indicates the timestamp of the backup to be restored
     timestamp = resource.prop('BackupRestorePoint')
