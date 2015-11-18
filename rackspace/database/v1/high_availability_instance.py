@@ -16,7 +16,7 @@ from openstack import utils
 from rackspace.database import database_service
 
 
-class HA(resource.Resource):
+class HighAvailabilityInstance(resource.Resource):
     base_path = 'ha'
     resource_key = 'ha_instance'
     resources_key = 'ha_instances'

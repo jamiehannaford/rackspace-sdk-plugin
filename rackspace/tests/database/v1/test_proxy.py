@@ -14,7 +14,7 @@ from openstack.tests.unit import test_proxy_base
 from rackspace.database.v1 import _proxy
 from rackspace.database.v1 import backup
 from rackspace.database.v1 import backup_schedule
-from rackspace.database.v1 import ha
+from rackspace.database.v1 import high_availability_instance
 
 
 class TestDatabaseProxy(test_proxy_base.TestProxyBase):
@@ -71,23 +71,33 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
                            backup_schedule.BackupSchedule)
 
     def test_ha_instances(self):
-        self.verify_list(self.proxy.ha_instances, ha.HA, paginated=False)
+        self.verify_list(self.proxy.ha_instances,
+                         high_availability_instance.HighAvailabilityInstance,
+                         paginated=False)
 
     def test_ha_instance_create(self):
-        self.verify_create(self.proxy.create_ha_instance, ha.HA)
+        self.verify_create(self.proxy.create_ha_instance,
+                           high_availability_instance.HighAvailabilityInstance)
 
     def test_ha_instance_delete(self):
-        self.verify_delete(self.proxy.delete_ha_instance, ha.HA, False)
+        self.verify_delete(self.proxy.delete_ha_instance,
+                           high_availability_instance.HighAvailabilityInstance,
+                           False)
 
     def test_ha_instance_delete_ignore(self):
-        self.verify_delete(self.proxy.delete_ha_instance, ha.HA, True)
+        self.verify_delete(self.proxy.delete_ha_instance,
+                           high_availability_instance.HighAvailabilityInstance,
+                           True)
 
     def test_ha_instance_find(self):
-        self.verify_find('rackspace.database.v1.ha.HA.find',
+        self.verify_find(('rackspace.database.v1.high_availability_instance'
+                         '.HighAvailabilityInstance.find'),
                          self.proxy.find_ha_instance)
 
     def test_ha_instance_get(self):
-        self.verify_get(self.proxy.get_ha_instance, ha.HA)
+        self.verify_get(self.proxy.get_ha_instance,
+                        high_availability_instance.HighAvailabilityInstance)
 
     def test_ha_instance_update(self):
-        self.verify_update(self.proxy.update_ha_instance, ha.HA)
+        self.verify_update(self.proxy.update_ha_instance,
+                           high_availability_instance.HighAvailabilityInstance)

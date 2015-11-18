@@ -13,7 +13,7 @@
 import mock
 import testtools
 
-from rackspace.database.v1 import ha
+from rackspace.database.v1 import high_availability_instance
 
 CIDR = '5.6.7.8/9'
 REPLICA_NAME = 'Roy Batty'
@@ -49,7 +49,7 @@ EXAMPLE = {
 
 class TestHA(testtools.TestCase):
     def test_basic(self):
-        sot = ha.HA()
+        sot = high_availability_instance.HighAvailabilityInstance()
         self.assertEqual('ha', sot.base_path)
         self.assertEqual('ha_instance', sot.resource_key)
         self.assertEqual('ha_instances', sot.resources_key)
@@ -61,7 +61,7 @@ class TestHA(testtools.TestCase):
         self.assertTrue(sot.allow_list)
 
     def test_make_it(self):
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
         self.assertEqual(EXAMPLE['acls'], sot.acls)
         self.assertEqual(EXAMPLE['datastore'], sot.datastore)
         self.assertEqual(EXAMPLE['id'], sot.id)
@@ -76,12 +76,12 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.MagicMock()
         sess.post.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.add_acl(sess, CIDR))
 
         body = {"address": CIDR}
-        url = ("ha/%s/acls" % sot['id'])
+        url = ("ha/%s/acls" % sot.id)
         sess.post.assert_called_with(url, service=sot.service, json=body)
 
     def test_delete_acl(self):
@@ -90,11 +90,11 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.delete = mock.MagicMock()
         sess.delete.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.delete_acl(sess, CIDR))
 
-        url = ("ha/%s/acls/%s" % (sot['id'], CIDR))
+        url = ("ha/%s/acls/%s" % (sot.id, CIDR))
         sess.delete.assert_called_with(url, service=sot.service)
 
     def test_get_acls(self):
@@ -104,11 +104,11 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.get = mock.MagicMock()
         sess.get.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(response.body['acls'], sot.get_acls(sess))
 
-        url = ("ha/%s/acls" % sot['id'])
+        url = ("ha/%s/acls" % sot.id)
         sess.get.assert_called_with(url, service=sot.service)
 
     def test_add_replica(self):
@@ -117,7 +117,7 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.MagicMock()
         sess.post.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.add_replica(
             sess, REPLICA_NAME, FLAVOR_REFERENCE, VOLUME_SIZE))
@@ -135,7 +135,7 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.MagicMock()
         sess.post.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.remove_replica(sess, UUID))
 
@@ -149,7 +149,7 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.MagicMock()
         sess.post.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.resize(sess, FLAVOR_REFERENCE))
 
@@ -163,7 +163,7 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.MagicMock()
         sess.post.return_value = response
-        sot = ha.HA(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
         self.assertEqual(None, sot.resize_volume(sess, VOLUME_SIZE))
 

@@ -19,7 +19,7 @@ from openstack.database.v1 import user
 from rackspace.database import database_service
 from rackspace.database.v1 import backup
 from rackspace.database.v1 import backup_schedule
-from rackspace.database.v1 import ha
+from rackspace.database.v1 import high_availability_instance
 
 
 database.Database.service = database_service.DatabaseService()
@@ -83,8 +83,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: One :class:`~rackspace.database.v1.backup.Backup` or None
         """
-        return backup.Backup.find(self.session, name_or_id,
-                                  ignore_missing=ignore_missing)
+        return backup.Backup.find(
+            self.session, name_or_id, ignore_missing=ignore_missing)
 
     def get_backup(self, value):
         """Get a single database backup
@@ -108,8 +108,8 @@ class Proxy(_proxy.Proxy):
 
         :rtype: :class:`~rackspace.database.v1.backup_schedule.BackupSchedule`
         """
-        return self._list(backup_schedule.BackupSchedule,
-                          paginated=False, **query)
+        return self._list(
+            backup_schedule.BackupSchedule, paginated=False, **query)
 
     def create_backup_schedule(self, **attrs):
         """Create a new database backup schedule from attributes
@@ -191,28 +191,35 @@ class Proxy(_proxy.Proxy):
                                  the resources being returned.
         :returns: A generator of high availability instances objects
 
-        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        :rtype: :class:`~rackspace.database.v1
+                         .high_availability_instance.HighAvailabilityInstance`
         """
-        return self._list(ha.HA,
+        return self._list(high_availability_instance.HighAvailabilityInstance,
                           paginated=False, **query)
 
     def create_ha_instance(self, **attrs):
         """Create a new high availability instance from attributes
 
         :param dict attrs: Keyword arguments which will be used to create a
-                           :class:`~rackspace.database.v1.ha.HA`,
+                           :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance`,
                            comprised of the properties on the HA class.
         :returns: The results of high availability instance creation
 
-        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        :rtype: :class:`~rackspace.database.v1
+                        .high_availability_instance.HighAvailabilityInstance`
         """
-        return self._create(ha.HA, **attrs)
+        return self._create(
+            high_availability_instance.HighAvailabilityInstance, **attrs)
 
     def delete_ha_instance(self, value, ignore_missing=True):
         """Delete a high availability instance
 
         :param value: The value can be either the ID of a backup schedule or
-                      a :class:`~rackspace.database.v1.ha.HA` instance.
+                      a :class:`~rackspace.database.v1
+                                .high_availability_instance
+                                .HighAvailabilityInstance` instance.
         :param bool ignore_missing: When set to ``False``
                 :class:`~openstack.exceptions.ResourceNotFound` will be raised
                 when the high availability instance does not exist. When set
@@ -221,8 +228,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: ``None``
         """
-        self._delete(ha.HA, value,
-                     ignore_missing=ignore_missing)
+        self._delete(high_availability_instance.HighAvailabilityInstance,
+                     value, ignore_missing=ignore_missing)
 
     def find_ha_instance(self, name_or_id, ignore_missing=True):
         """Find a single high availability instance
@@ -234,32 +241,44 @@ class Proxy(_proxy.Proxy):
                     ``True``, None will be returned when attempting to find
                     a nonexistent resource.
 
-        :returns: One :class:`~rackspace.database.v1.ha.HA` or None
+        :returns: One :class:`~rackspace.database.v1
+                              .high_availability_instance
+                              .HighAvailabilityInstance` or None
         """
-        return ha.HA.find(
+        return high_availability_instance.HighAvailabilityInstance.find(
             self.session, name_or_id, ignore_missing=ignore_missing)
 
     def get_ha_instance(self, value):
         """Get a single high availability instance
 
         :param value: The value can be the ID of a high availability instance
-                      or a :class:`~rackspace.database.v1.ha.HA` instance.
+                      or a :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance` instance.
 
-        :returns: One :class:`~rackspace.database.v1.ha.HA`
+        :returns: One :class:`~rackspace.database.v1
+          .high_availability_instance.HighAvailabilityInstance`
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
                  when no resource can be found.
         """
-        return self._get(ha.HA, value)
+        return self._get(
+            high_availability_instance.HighAvailabilityInstance, value)
 
     def update_ha_instance(self, value, **attrs):
         """Update a high availability instance
 
         :param value: Either the id of a high availability instance instance
-                      or a :class:`~rackspace.database.v1.ha.HA` instance.
+                      or a :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance` instance.
         :attrs kwargs: The attributes to update on the instance represented
                        by ``value``.
 
         :returns: The updated high availability instance
-        :rtype: :class:`~rackspace.database.v1.ha.HA`
+        :rtype: :class:`~rackspace.database.v1
+                        .high_availability_instance
+                        .HighAvailabilityInstance`
         """
-        return self._update(ha.HA, value, **attrs)
+        return self._update(
+            high_availability_instance.HighAvailabilityInstance,
+            value, **attrs)
