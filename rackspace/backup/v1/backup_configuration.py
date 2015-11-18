@@ -11,6 +11,7 @@
 # under the License.
 
 from openstack import resource
+from openstack import utils
 from rackspace.backup import backup_service
 
 
@@ -94,3 +95,33 @@ class BackupConfiguration(resource.Resource):
     #: Specifies the time zone where the backup runs. For example:
     #: ``Eastern Standard Time``.
     timezone = resource.prop('TimeZoneId')
+
+    def disable(self, session):
+        """Disable backup configuration.
+
+        This operation disables the backup configuration. Disabling a backup
+        configuration does not delete it or its data. You can re-enable
+        disabled backup configurations later.
+
+        :param session: The session to use for making this request.
+        :type session: :class:`~openstack.session.Session`
+        :returns: ``None``
+        """
+        body = {"Enable": 'false'}
+        url = utils.urljoin('backup-configuration', 'enable', self.id)
+        session.post(url, service=self.service, json=body)
+
+    def enable(self, session):
+        """Enable backup configuration.
+
+        This operation enables the backup configuration. Disabling a backup
+        configuration does not delete it or its data. You can re-enable
+        disabled backup configurations later.
+
+        :param session: The session to use for making this request.
+        :type session: :class:`~openstack.session.Session`
+        :returns: ``None``
+        """
+        body = {"Enable": 'true'}
+        url = utils.urljoin('backup-configuration', 'enable', self.id)
+        session.post(url, service=self.service, json=body)

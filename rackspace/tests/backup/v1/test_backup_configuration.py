@@ -10,6 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import mock
 import testtools
 
 from rackspace.backup.v1 import backup_configuration
@@ -106,3 +107,31 @@ class TestBackupConfiguration(testtools.TestCase):
         self.assertEqual(EXAMPLE['StartTimeHour'], sot.start_hour_at)
         self.assertEqual(EXAMPLE['StartTimeHour'], sot.start_minute_at)
         self.assertEqual(EXAMPLE['TimeZoneId'], sot.timezone)
+
+    def test_disable(self):
+        response = mock.Mock()
+        response.body = ''
+        sess = mock.Mock()
+        sess.post = mock.MagicMock()
+        sess.post.return_value = response
+        sot = backup_configuration.BackupConfiguration(EXAMPLE)
+
+        self.assertIsNone(sot.disable(sess))
+
+        body = {"Enable": 'false'}
+        url = 'backup-configuration/enable/%s' % sot.id
+        sess.post.assert_called_with(url, service=sot.service, json=body)
+
+    def test_enable(self):
+        response = mock.Mock()
+        response.body = ''
+        sess = mock.Mock()
+        sess.post = mock.MagicMock()
+        sess.post.return_value = response
+        sot = backup_configuration.BackupConfiguration(EXAMPLE)
+
+        self.assertIsNone(sot.enable(sess))
+
+        body = {"Enable": 'true'}
+        url = 'backup-configuration/enable/%s' % sot.id
+        sess.post.assert_called_with(url, service=sot.service, json=body)
