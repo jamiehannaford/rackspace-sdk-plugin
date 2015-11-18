@@ -112,7 +112,7 @@ class TestBackupConfiguration(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = backup_configuration.BackupConfiguration(EXAMPLE)
 
@@ -126,7 +126,7 @@ class TestBackupConfiguration(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = backup_configuration.BackupConfiguration(EXAMPLE)
 

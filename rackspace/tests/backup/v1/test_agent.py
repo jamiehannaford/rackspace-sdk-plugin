@@ -85,7 +85,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 
@@ -99,7 +99,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 
@@ -114,7 +114,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 
@@ -128,7 +128,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 
@@ -143,7 +143,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 
@@ -158,7 +158,7 @@ class TestAgent(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = agent.Agent(EXAMPLE)
 

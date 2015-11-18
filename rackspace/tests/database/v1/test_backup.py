@@ -79,7 +79,7 @@ class TestBackup(testtools.TestCase):
         response = mock.Mock()
         response.body = {'instance': None}
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = backup.Backup(EXAMPLE)
 

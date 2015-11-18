@@ -74,7 +74,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -88,7 +88,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.delete = mock.MagicMock()
+        sess.delete = mock.Mock()
         sess.delete.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -102,7 +102,7 @@ class TestHA(testtools.TestCase):
         response.body = {"acls": [{"address": "10.0.0.0/0"},
                                   {"address": "1.2.3.4/5"}]}
         sess = mock.Mock()
-        sess.get = mock.MagicMock()
+        sess.get = mock.Mock()
         sess.get.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -115,7 +115,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -133,7 +133,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -147,7 +147,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 
@@ -161,7 +161,7 @@ class TestHA(testtools.TestCase):
         response = mock.Mock()
         response.body = ''
         sess = mock.Mock()
-        sess.post = mock.MagicMock()
+        sess.post = mock.Mock()
         sess.post.return_value = response
         sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
 

@@ -35,7 +35,7 @@ class Test_bulk_delete(TestObjectStoreProxy):
 
     @mock.patch("rackspace.object_store.v1.bulk_delete.BulkDelete.delete")
     def test(self, mock_delete):
-        self.proxy.objects = mock.MagicMock()
+        self.proxy.objects = mock.Mock()
         container_name = "Clark"
         object_name = "Addison"
         rv = [container.Container.new(name=object_name,

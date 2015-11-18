@@ -31,7 +31,7 @@ class TestBulkDelete(testtools.TestCase):
         self.resp = mock.Mock()
         self.resp.body = BODY
         self.sess = mock.Mock()
-        self.sess.delete = mock.MagicMock()
+        self.sess.delete = mock.Mock()
         self.sess.delete.return_value = self.resp
 
     def test_basic(self):
