@@ -91,7 +91,7 @@ class TestAgent(testtools.TestCase):
 
         self.assertIsNone(sot.disable(sess))
 
-        body = {'MachineAgentId': sot['MachineAgentId'], 'Enable': 'false'}
+        body = {'MachineAgentId': sot.id, 'Enable': 'false'}
         url = 'agent/enable'
         sess.post.assert_called_with(url, service=sot.service, json=body)
 
@@ -105,7 +105,7 @@ class TestAgent(testtools.TestCase):
 
         self.assertEqual('', sot.encrypt_volume(sess, ENCRYPTIONKEY))
 
-        body = {'MachineAgentId': sot['MachineAgentId'],
+        body = {'MachineAgentId': sot.id,
                 'EncryptedPasswordHex': ENCRYPTIONKEY}
         url = 'agent/encrypt'
         sess.post.assert_called_with(url, service=sot.service, json=body)
@@ -120,7 +120,7 @@ class TestAgent(testtools.TestCase):
 
         self.assertIsNone(sot.enable(sess))
 
-        body = {'MachineAgentId': sot['MachineAgentId'], 'Enable': 'true'}
+        body = {'MachineAgentId': sot.id, 'Enable': 'true'}
         url = 'agent/enable'
         sess.post.assert_called_with(url, service=sot.service, json=body)
 
@@ -134,7 +134,7 @@ class TestAgent(testtools.TestCase):
 
         self.assertIsNone(sot.migrate_vault(sess, DESTINATION))
 
-        body = {'SourceMachineAgentId': sot['MachineAgentId'],
+        body = {'SourceMachineAgentId': sot.id,
                 'DestinationMachineAgentId': DESTINATION}
         url = 'agent/migratevault'
         sess.post.assert_called_with(url, service=sot.service, json=body)
@@ -151,7 +151,7 @@ class TestAgent(testtools.TestCase):
 
         body = {'BackupDataCenter': DATACENTER,
                 'UseServiceNet': SERVICENET}
-        url = 'agent/%s' % sot['MachineAgentId']
+        url = 'agent/%s' % sot.id
         sess.post.assert_called_with(url, service=sot.service, json=body)
 
     def test_update_encryption_password(self):
@@ -165,7 +165,7 @@ class TestAgent(testtools.TestCase):
         self.assertEqual('', sot.update_encryption_password(
             sess, OLD_KEY, NEW_KEY))
 
-        body = {'MachineAgentId': sot['MachineAgentId'],
+        body = {'MachineAgentId': sot.id,
                 'OldEncryptedPasswordHex': OLD_KEY,
                 'NewEncryptedPasswordHex': NEW_KEY}
         url = 'agent/changeencryption'
