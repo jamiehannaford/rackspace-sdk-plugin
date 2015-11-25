@@ -46,6 +46,10 @@ class Connection(connection.Connection):
             raise exceptions.AuthorizationFailure(
                 "username and tenant_id cannot be used together")
 
+        if username is None and tenant_id is None:
+            raise exceptions.AuthorizationFailure(
+                "username or tenant_id must be specified")
+
         if username is not None:
             if "api_key" in kwargs:
                 auth = v2.APIKey(username=username,
