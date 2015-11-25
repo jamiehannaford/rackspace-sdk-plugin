@@ -55,9 +55,8 @@ class TestBackupProxy(test_proxy_base.TestProxyBase):
                            backup_configuration.BackupConfiguration, True)
 
     def test_backup_configuration_find(self):
-        self.verify_find('rackspace.backup.v1.backup_configuration'
-                         '.BackupConfiguration.find',
-                         self.proxy.find_backup_configuration)
+        self.verify_find(self.proxy.find_backup_configuration,
+                         backup_configuration.BackupConfiguration)
 
     def test_backup_configuration_get(self):
         self.verify_get(self.proxy.get_backup_configuration,

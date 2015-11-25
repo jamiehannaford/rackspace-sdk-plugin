@@ -83,8 +83,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: One :class:`~rackspace.database.v1.backup.Backup` or None
         """
-        return backup.Backup.find(
-            self.session, name_or_id, ignore_missing=ignore_missing)
+        return self._find(backup.Backup, name_or_id,
+                          ignore_missing=ignore_missing)
 
     def get_backup(self, value):
         """Get a single database backup
@@ -153,8 +153,8 @@ class Proxy(_proxy.Proxy):
         :returns: One :class:`~rackspace.database.v1
                                .backup_schedule.BackupSchedule` or None
         """
-        return backup_schedule.BackupSchedule.find(
-            self.session, name_or_id, ignore_missing=ignore_missing)
+        return self._find(backup_schedule.BackupSchedule, name_or_id,
+                          ignore_missing=ignore_missing)
 
     def get_backup_schedule(self, value):
         """Get a single database backup schedule
@@ -245,8 +245,8 @@ class Proxy(_proxy.Proxy):
                               .high_availability_instance
                               .HighAvailabilityInstance` or None
         """
-        return high_availability_instance.HighAvailabilityInstance.find(
-            self.session, name_or_id, ignore_missing=ignore_missing)
+        return self._find(high_availability_instance.HighAvailabilityInstance,
+                          name_or_id, ignore_missing=ignore_missing)
 
     def get_ha_instance(self, value):
         """Get a single high availability instance
