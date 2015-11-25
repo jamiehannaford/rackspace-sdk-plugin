@@ -35,8 +35,7 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
         self.verify_delete(self.proxy.delete_backup, backup.Backup, True)
 
     def test_backup_find(self):
-        self.verify_find('rackspace.database.v1.backup.Backup.find',
-                         self.proxy.find_backup)
+        self.verify_find(self.proxy.find_backup, backup.Backup)
 
     def test_backup_get(self):
         self.verify_get(self.proxy.get_backup, backup.Backup)
@@ -58,9 +57,8 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
                            backup_schedule.BackupSchedule, True)
 
     def test_backup_schedule_find(self):
-        self.verify_find('rackspace.database.v1.backup_schedule'
-                         '.BackupSchedule.find',
-                         self.proxy.find_backup_schedule)
+        self.verify_find(self.proxy.find_backup_schedule,
+                         backup_schedule.BackupSchedule)
 
     def test_backup_schedule_get(self):
         self.verify_get(self.proxy.get_backup_schedule,
@@ -90,9 +88,8 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
                            True)
 
     def test_ha_instance_find(self):
-        self.verify_find(('rackspace.database.v1.high_availability_instance'
-                         '.HighAvailabilityInstance.find'),
-                         self.proxy.find_ha_instance)
+        self.verify_find(self.proxy.find_ha_instance,
+                         high_availability_instance.HighAvailabilityInstance)
 
     def test_ha_instance_get(self):
         self.verify_get(self.proxy.get_ha_instance,

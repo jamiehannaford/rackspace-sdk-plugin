@@ -111,8 +111,8 @@ class Proxy(proxy.BaseProxy):
         :returns: One :class:`~rackspace.backup.v1.backup_configuration
                                                .BackupConfiguration` or None
         """
-        return (backup_configuration.BackupConfiguration
-                .find(self.session, name_or_id, ignore_missing=ignore_missing))
+        return self._find(backup_configuration.BackupConfiguration,
+                          name_or_id, ignore_missing=ignore_missing)
 
     def get_backup_configuration(self, value):
         """Get a single backup configuration
