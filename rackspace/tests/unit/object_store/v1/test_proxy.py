@@ -12,10 +12,7 @@
 
 import mock
 from openstack.object_store.v1 import container
-from openstack import session
-from openstack.tests.unit import fakes
 from openstack.tests.unit import test_proxy_base
-from openstack import transport
 
 from rackspace.object_store.v1 import _proxy
 
@@ -24,9 +21,7 @@ class TestObjectStoreProxy(test_proxy_base.TestProxyBase):
 
     def setUp(self):
         super(TestObjectStoreProxy, self).setUp()
-        self.transport = transport.Transport(accept=transport.JSON)
-        self.auth = fakes.FakeAuthenticator()
-        self.session = session.Session(self.transport, self.auth)
+        self.session = mock.Mock()
 
         self.proxy = _proxy.Proxy(self.session)
 

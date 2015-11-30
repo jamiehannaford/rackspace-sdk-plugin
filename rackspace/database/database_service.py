@@ -10,7 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack.auth import service_filter
+from openstack import service_filter
 
 
 class DatabaseService(service_filter.ServiceFilter):
@@ -21,5 +21,6 @@ class DatabaseService(service_filter.ServiceFilter):
     def __init__(self, version=None):
         """Create a database service."""
 
-        super(DatabaseService, self).__init__(service_name="cloudDatabases",
+        super(DatabaseService, self).__init__(service_type="rax:database",
+                                              service_name="cloudDatabases",
                                               version=version)

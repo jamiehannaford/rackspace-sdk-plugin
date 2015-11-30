@@ -19,7 +19,7 @@ class TestDatabaseService(testtools.TestCase):
 
     def test_service(self):
         sot = database_service.DatabaseService()
-        self.assertEqual("any", sot.service_type)
+        self.assertEqual("rax:database", sot.service_type)
         self.assertEqual("public", sot.interface)
         self.assertIsNone(sot.region)
         self.assertEqual("cloudDatabases", sot.service_name)
