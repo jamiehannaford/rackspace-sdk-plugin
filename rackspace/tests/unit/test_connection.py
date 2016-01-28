@@ -25,6 +25,7 @@ class TestConnection(unittest2.TestCase):
     @mock.patch("rackspace.connection.Connection._open")
     def test_with_region(self, mock_open=lambda: None):
         prof = mock.Mock()
+        prof.get_services = mock.Mock(return_value=list())
         region = "BEN"
 
         connection.Connection(region=region, profile=prof,

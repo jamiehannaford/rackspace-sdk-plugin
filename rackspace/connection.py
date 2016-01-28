@@ -38,6 +38,13 @@ class Connection(connection.Connection):
 
         profile.set_region(profile.ALL, region)
 
+        global_services = ('cloudMetrics', 'cloudMetricsIngest',
+                           'cloudMonitoring', 'rackCDN')
+
+        for service in profile.get_services():
+            if service.service_name in global_services:
+                service.region = None
+
         username = kwargs.pop("username", None)
         tenant_id = kwargs.pop("tenant_id", None)
 
