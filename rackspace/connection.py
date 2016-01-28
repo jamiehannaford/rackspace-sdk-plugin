@@ -11,7 +11,6 @@
 # under the License.
 
 from openstack import connection
-from openstack import exceptions
 from openstack import profile as _profile
 from rackspaceauth import v2
 
@@ -43,12 +42,10 @@ class Connection(connection.Connection):
         tenant_id = kwargs.pop("tenant_id", None)
 
         if all([username, tenant_id]):
-            raise exceptions.AuthorizationFailure(
-                "username and tenant_id cannot be used together")
+            raise ValueError("username and tenant_id cannot be used together")
 
         if username is None and tenant_id is None:
-            raise exceptions.AuthorizationFailure(
-                "username or tenant_id must be specified")
+            raise ValueError("username or tenant_id must be specified")
 
         if username is not None:
             if "api_key" in kwargs:
@@ -58,7 +55,7 @@ class Connection(connection.Connection):
                 auth = v2.Password(username=username,
                                    password=kwargs.pop("password"))
             else:
-                raise exceptions.AuthorizationFailure(
+                raise ValueError(
                     "Either api_key or password must be passed with username")
         else:
             auth = v2.Token(tenant_id=tenant_id, token=kwargs.pop("token"))

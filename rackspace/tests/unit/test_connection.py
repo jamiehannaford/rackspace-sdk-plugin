@@ -11,7 +11,6 @@
 # under the License.
 
 import mock
-from openstack import exceptions
 import unittest2
 
 from rackspace import connection
@@ -64,19 +63,19 @@ class TestConnection(unittest2.TestCase):
         mock_token.assert_called_with(tenant_id=tenant, token=token)
 
     def test_auth_no_user_or_tenant(self):
-        self.assertRaisesRegexp(exceptions.AuthorizationFailure,
+        self.assertRaisesRegexp(ValueError,
                                 "username or tenant_id must be specified",
                                 connection.Connection, region="test")
 
     def test_auth_user_and_tenant(self):
         self.assertRaisesRegexp(
-            exceptions.AuthorizationFailure,
+            ValueError,
             "username and tenant_id cannot be used together",
             connection.Connection, username="test", tenant_id="test",
             region="test")
 
     def test_auth_user_only(self):
         self.assertRaisesRegexp(
-            exceptions.AuthorizationFailure,
+            ValueError,
             "Either api_key or password must be passed with username",
             connection.Connection, username="test", region="test")
