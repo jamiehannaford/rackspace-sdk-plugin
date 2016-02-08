@@ -49,7 +49,7 @@ class TestEntity(testtools.TestCase):
         self.assertEqual(EXAMPLE['created_at'], sot.created_at)
         self.assertEqual(EXAMPLE['ip_addresses'], sot.ip_addresses)
         self.assertFalse(sot.is_managed)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['metadata'], sot.metadata)
         self.assertEqual(EXAMPLE['scheduled_suppressions'],
                          sot.scheduled_suppressions)

@@ -43,10 +43,10 @@ class Alarm(resource.Resource):
     entity_id = resource.prop('entity_id')
     #: Disables the alarm. *Type: bool*
     is_disabled = resource.prop('disabled', type=format.BoolStr)
-    #: A friendly label for an alarm
-    label = resource.prop('label')
     #: Arbitrary key/value pairs. *Type: dict*
     metadata = resource.prop('metadata', type=dict)
+    #: A friendly label for an alarm
+    name = resource.prop('label')
     #: The id of the notification plan to execute when the state changes
     notification_plan_id = resource.prop('notification_plan_id')
     #: List of scheduled suppressions. *Type: list*

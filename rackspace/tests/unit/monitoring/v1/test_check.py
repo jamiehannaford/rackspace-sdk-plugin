@@ -62,7 +62,7 @@ class TestCheck(testtools.TestCase):
         self.assertEqual(EXAMPLE['details'], sot.details)
         self.assertEqual(EXAMPLE['entity_id'], sot.entity_id)
         self.assertEqual(EXAMPLE['period'], sot.frequency)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['monitoring_zones_poll'],
                          sot.monitoring_zones)
         self.assertEqual(EXAMPLE['scheduled_suppressions'],

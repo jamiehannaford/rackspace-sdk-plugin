@@ -45,6 +45,6 @@ class TestSuppression(testtools.TestCase):
         self.assertEqual(EXAMPLE['checks'], sot.checks)
         self.assertEqual(EXAMPLE['end_time'], sot.ends_at)
         self.assertEqual(EXAMPLE['entities'], sot.entities)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['notification_plans'], sot.notification_plans)
         self.assertEqual(EXAMPLE['start_time'], sot.starts_at)

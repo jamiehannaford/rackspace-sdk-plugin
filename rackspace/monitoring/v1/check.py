@@ -44,13 +44,13 @@ class Check(resource.Resource):
     frequency = resource.prop('period', type=int)
     #: Disables the check. *Type: bool*
     is_disabled = resource.prop('disabled', type=format.BoolStr)
-    #: A friendly label for a check
-    label = resource.prop('label')
     #: Arbitrary key/value pairs. *Type: dict*
     metadata = resource.prop('metadata', type=dict)
     #: List of monitoring zones to poll from. *Type: list*
     #: Note: This argument is only required for remote (non-agent) checks.
     monitoring_zones = resource.prop('monitoring_zones_poll', type=list)
+    #: A friendly label for a check
+    name = resource.prop('label')
     #: List of scheduled suppressions. *Type: list*
     scheduled_suppressions = resource.prop('scheduled_suppressions', type=list)
     #: A key in the entity's ip_addresses hash used to resolve this check to

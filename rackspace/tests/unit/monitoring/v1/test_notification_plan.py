@@ -46,7 +46,7 @@ class TestNotificationPlan(testtools.TestCase):
         self.assertEqual(EXAMPLE['active_suppressions'],
                          sot.active_suppressions)
         self.assertEqual(EXAMPLE['created_at'], sot.created_at)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['metadata'], sot.metadata)
         self.assertEqual(EXAMPLE['critical_state'], sot.recipients_on_critical)
         self.assertEqual(EXAMPLE['ok_state'], sot.recipients_on_ok)

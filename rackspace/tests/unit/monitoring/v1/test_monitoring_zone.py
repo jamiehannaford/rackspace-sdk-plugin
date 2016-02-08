@@ -42,7 +42,7 @@ class TestMonitoringZone(testtools.TestCase):
     def test_make_it(self):
         sot = monitoring_zone.MonitoringZone(EXAMPLE)
         self.assertEqual(EXAMPLE['country_code'], sot.country)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['source_ips'], sot.source_ip_addresses)
 
     def test_traceroute(self):

@@ -31,7 +31,7 @@ class Notification(resource.Resource):
     #: Details specific to the notification. *Type: dict*
     details = resource.prop('details', type=dict)
     #: A friendly label for the notification type
-    label = resource.prop('label')
+    name = resource.prop('label')
     #: The type of notification to send
     type = resource.prop('type')
 

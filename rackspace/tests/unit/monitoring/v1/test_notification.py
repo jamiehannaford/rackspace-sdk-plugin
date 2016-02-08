@@ -43,7 +43,7 @@ class TestNotification(testtools.TestCase):
         sot = notification.Notification(EXAMPLE)
         self.assertEqual(EXAMPLE['created_at'], sot.created_at)
         self.assertEqual(EXAMPLE['details'], sot.details)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['metadata'], sot.metadata)
         self.assertEqual(EXAMPLE['type'], sot.type)
         self.assertEqual(EXAMPLE['updated_at'], sot.updated_at)

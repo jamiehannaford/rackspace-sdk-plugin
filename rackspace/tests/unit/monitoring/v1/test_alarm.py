@@ -62,7 +62,7 @@ class TestAlarm(testtools.TestCase):
         self.assertEqual(EXAMPLE['criteria'], sot.criteria)
         self.assertFalse(sot.is_disabled)
         self.assertEqual(EXAMPLE['entity_id'], sot.entity_id)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)
         self.assertEqual(EXAMPLE['metadata'], sot.metadata)
         self.assertEqual(EXAMPLE['notification_plan_id'],
                          sot.notification_plan_id)

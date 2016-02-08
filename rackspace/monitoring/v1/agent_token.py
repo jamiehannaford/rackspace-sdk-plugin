@@ -28,7 +28,7 @@ class AgentToken(resource.Resource):
 
     # Properties
     #: Optional description string
-    label = resource.prop('label')
+    name = resource.prop('label')
     #: The agent token ID. Agent tokens are used to authenticate monitoring
     #: agents to the monitoring service. Multiple agents on an account can
     #: share a single token.

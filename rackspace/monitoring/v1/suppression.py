@@ -40,7 +40,7 @@ class Suppression(resource.Resource):
     #: *Type: list*
     entities = resource.prop('entities', type=list)
     #: A friendly label for the suppression
-    label = resource.prop('label')
+    name = resource.prop('label')
     #: A list of notification plans IDs for determining notification plans
     #: *Type: list*
     notification_plans = resource.prop('notification_plans', type=list)

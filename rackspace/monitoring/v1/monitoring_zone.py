@@ -28,7 +28,7 @@ class MonitoringZone(resource.Resource):
     #: Country Code
     country = resource.prop('country_code')
     #: A friendly label for the monitoring zone
-    label = resource.prop('label')
+    name = resource.prop('label')
     #: Source IP list for the monitoring zone. *Type: list*
     source_ip_addresses = resource.prop('source_ips', type=list)
 

@@ -28,7 +28,7 @@ class NotificationPlan(resource.Resource):
 
     # Properties
     #: A friendly label for the notification plan
-    label = resource.prop('label')
+    name = resource.prop('label')
     #: Arbitrary key/value pairs. *Type: dict*
     metadata = resource.prop('metadata', type=dict)
     #: The list of recipients to notify when the state is `CRITICAL`.

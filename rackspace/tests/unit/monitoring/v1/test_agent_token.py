@@ -36,4 +36,4 @@ class TestAgentToken(testtools.TestCase):
     def test_make_it(self):
         sot = agent_token.AgentToken(EXAMPLE)
         self.assertEqual(EXAMPLE['token'], sot.token)
-        self.assertEqual(EXAMPLE['label'], sot.label)
+        self.assertEqual(EXAMPLE['label'], sot.name)

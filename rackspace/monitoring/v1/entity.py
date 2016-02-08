@@ -43,10 +43,10 @@ class Entity(resource.Resource):
     #: Indicates if this entity is managed
     #: by Rackspace Managed Cloud. *Type: bool*
     is_managed = resource.prop('managed', type=format.BoolStr)
-    #: A friendly label for the entity
-    label = resource.prop('label')
     #: Arbitrary key/value pairs. *Type: dict*
     metadata = resource.prop('metadata', type=dict)
+    #: A friendly label for the entity
+    name = resource.prop('label')
     #: List of scheduled suppressions. *Type: list*
     scheduled_suppressions = resource.prop('scheduled_suppressions', type=list)
     #: Update timestamp.
