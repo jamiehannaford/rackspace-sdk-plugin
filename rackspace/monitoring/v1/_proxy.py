@@ -340,7 +340,7 @@ class Proxy(proxy.BaseProxy):
                       :class:`~rackspace.monitoring.v1.alarm.Alarm` instance.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `alarm`.
         :param bool ignore_missing: When set to ``False``
             :class:`~openstack.exceptions.ResourceNotFound` will be raised when
             the resource does not exist. When set to ``True``, ``None`` will be
@@ -361,7 +361,7 @@ class Proxy(proxy.BaseProxy):
         :param name_or_id: The name or ID of an alarm.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `alarm`.
         :param bool ignore_missing: When set to ``False``
             :class:`~openstack.exceptions.ResourceNotFound` will be raised when
             the resource does not exist. When set to ``True``, ``None`` will be
@@ -384,7 +384,7 @@ class Proxy(proxy.BaseProxy):
                       :class:`~rackspace.monitoring.v1.alarm.Alarm` instance.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `alarm`.
 
         :returns: One :class:`~rackspace.monitoring.v1.alarm.Alarm`
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
@@ -404,7 +404,7 @@ class Proxy(proxy.BaseProxy):
                       :class:`~rackspace.monitoring.v1.alarm.Alarm` instance.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `alarm`.
 
         :returns: The updated alarm
         :rtype: :class:`~rackspace.monitoring.v1.alarm.Alarm`
@@ -456,7 +456,7 @@ class Proxy(proxy.BaseProxy):
                       a :class:`~rackspace.monitoring.v1.check.Check` instance.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `check`.
 
         :returns: ``list``
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
@@ -473,7 +473,7 @@ class Proxy(proxy.BaseProxy):
                       a :class:`~rackspace.monitoring.v1.check.Check` instance.
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
+            Needs to be specified when an ID is given for `check`.
 
         :returns: ``list``
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
@@ -985,7 +985,6 @@ class Proxy(proxy.BaseProxy):
 
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
         :param check_data: Metrics to check.
         :param criteria: The alarm DSL for describing alerting conditions.
 
@@ -1017,7 +1016,6 @@ class Proxy(proxy.BaseProxy):
 
         :param entity: The value can be either the ID of an entity or a
             :class:`~rackspace.monitoring.v1.entity.Entity` instance.
-            Needs to be specified when Entity ID is given as value.
         :param attributes: Valid set of attributes for check creation.
 
         :returns: ``list``
