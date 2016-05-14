@@ -13,6 +13,7 @@
 import mock
 import unittest2
 
+from openstack import profile
 from rackspace import connection
 
 
@@ -22,16 +23,14 @@ class TestConnection(unittest2.TestCase):
         with self.assertRaises(ValueError):
             connection.Connection()
 
-    @mock.patch("rackspace.connection.Connection._open")
-    def test_with_region(self, mock_open=lambda: None):
-        prof = mock.Mock()
-        prof.get_services = mock.Mock(return_value=list())
+    @mock.patch.object(profile.Profile, 'set_region')
+    def test_with_region(self, mock_set_region):
         region = "BEN"
 
-        connection.Connection(region=region, profile=prof,
+        connection.Connection(region=region,
                               username="test", api_key="test")
 
-        prof.set_region.assert_called_with(prof.ALL, region)
+        mock_set_region.assert_called_with(profile.Profile.ALL, region)
 
     @mock.patch("rackspaceauth.v2.APIKey")
     def test_auth_with_APIKey(self, mock_apikey):
