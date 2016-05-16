@@ -11,13 +11,14 @@
 # under the License.
 
 from openstack import connection
-from openstack import profile as _profile
 from rackspaceauth import v2
+
+from rackspace import profile as _profile
 
 
 class Connection(connection.Connection):
 
-    def __init__(self, profile=None, **kwargs):
+    def __init__(self, region, profile=None, **kwargs):
         """Create a connection to the Rackspace Public Cloud
 
         This is a subclass of :class:`openstack.connection.Connection` that
@@ -31,7 +32,7 @@ class Connection(connection.Connection):
         :raises: ValueError if no `region` is specified.
         """
         if profile is None:
-            profile = self._create_profile(**kwargs)
+            profile = _profile.Profile(region=region, **kwargs)
 
         username = kwargs.pop("username", None)
         tenant_id = kwargs.pop("tenant_id", None)
@@ -58,20 +59,3 @@ class Connection(connection.Connection):
         super(Connection, self).__init__(authenticator=auth,
                                          profile=profile,
                                          **kwargs)
-
-    def _create_profile(self, region=None, **kwargs):
-        profile = _profile.Profile(plugins=["rackspace"])
-
-        if region is None:
-            raise ValueError("You must specify a region to work with.")
-
-        profile.set_region(profile.ALL, region)
-
-        global_services = ('cloudMetrics', 'cloudMetricsIngest',
-                           'cloudMonitoring', 'rackCDN')
-
-        for service in profile.get_services():
-            if service.service_name in global_services:
-                service.region = None
-
-        return profile

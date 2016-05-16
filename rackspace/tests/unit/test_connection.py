@@ -20,7 +20,7 @@ from rackspace import connection
 class TestConnection(unittest2.TestCase):
 
     def test_no_region(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             connection.Connection()
 
     @mock.patch.object(profile.Profile, 'set_region')
