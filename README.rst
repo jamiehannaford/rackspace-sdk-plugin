@@ -28,7 +28,7 @@ Documentation
 Rackspace-specific documentation is not currently available.
 
 Documentation for the OpenStack SDK is available at
-http://python-openstacksdk.readthedocs.org/en/latest/
+http://developer.openstack.org/sdks/python/openstacksdk/
 
 Requirements
 ------------
