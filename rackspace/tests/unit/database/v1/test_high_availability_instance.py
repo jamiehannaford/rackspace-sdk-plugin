@@ -45,7 +45,7 @@ EXAMPLE = {
         "flavorRef": FLAVOR_REFERENCE,
         "name": "Tyrell"}
     ],
-    "configuration": CONFIG_UUID
+    "configuration_id": CONFIG_UUID
 }
 
 
@@ -71,7 +71,7 @@ class TestHA(testtools.TestCase):
         self.assertEqual(EXAMPLE['networks'], sot.networks)
         self.assertEqual(EXAMPLE['replicas'], sot.replicas)
         self.assertEqual(EXAMPLE['replica_source'], sot.replica_source)
-        self.assertEqual(EXAMPLE['configuration'], sot.configuration)
+        self.assertEqual(EXAMPLE['configuration_id'], sot.configuration_id)
 
     def test_add_acl(self):
         response = mock.Mock()
