@@ -54,7 +54,8 @@ class TestLoadBalancer(testtools.TestCase):
         self.assertTrue(sot.allow_create)
         self.assertTrue(sot.allow_list)
 
-        self.assertDictEqual({"status": "status",
+        self.assertDictEqual({"status": "status", "limit": "limit",
+                              "marker": "marker",
                               "node_address": "nodeaddress",
                               "changes_since": "changes-since"},
                              sot._query_mapping._mapping)

@@ -53,6 +53,8 @@ class HighAvailabilityInstance(resource.Resource):
     status = resource.prop('state')
     #: Volumes. *Type: dict*
     volume = resource.prop('volume', type=dict)
+    #: The configuration ID for this instance. *Type: string*
+    configuration_id = resource.prop('configuration')
 
     def add_acl(self, session, cidr):
         """Add Access Control List (ACL)
