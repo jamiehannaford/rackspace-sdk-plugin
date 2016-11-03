@@ -85,12 +85,13 @@ class TestHA(testtools.TestCase):
         sess = mock.Mock()
         sess.post = mock.Mock(return_value=resp)
 
-        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
+        sot = high_availability_instance.HighAvailabilityInstance()
         sot.name = 'foo'
         sot.create(sess)
 
         body = {"ha": {"name": "foo"}}
-        sess.post.assert_called_with("ha", service=sot.service, json=body)
+        sess.post.assert_called_with("ha", endpoint_filter=sot.service,
+                                     json=body)
 
     def test_add_acl(self):
         response = mock.Mock()
@@ -192,3 +193,19 @@ class TestHA(testtools.TestCase):
         body = {'resize': {'volume': VOLUME_SIZE}}
         url = ("ha/%s/action" % sot.id)
         sess.post.assert_called_with(url, service=sot.service, json=body)
+
+    def test_action_restart(self):
+        response = mock.Mock()
+        response.json = mock.Mock(return_value='')
+
+        sess = mock.Mock()
+        sess.post = mock.Mock(return_value=response)
+
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
+
+        self.assertIsNone(sot.restart(sess))
+
+        url = ("ha/%s/action" % sot.id)
+        body = {'restart': {}}
+        sess.post.assert_called_with(url, endpoint_filter=sot.service,
+                                     json=body)
