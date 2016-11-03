@@ -73,6 +73,21 @@ class TestHA(testtools.TestCase):
         self.assertEqual(EXAMPLE['replica_source'], sot.replica_source)
         self.assertEqual(EXAMPLE['configuration_id'], sot.configuration_id)
 
+    def test_create_json_is_overridden(self):
+        resp = mock.Mock()
+        resp.json = mock.Mock(return_value={'ha_instance': {}})
+        resp.headers = {'location': 'foo'}
+
+        sess = mock.Mock()
+        sess.post = mock.Mock(return_value=resp)
+
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
+        sot.name = 'foo'
+        sot.create(sess)
+
+        body = {"ha": {"foo": "name"}}
+        sess.post.assert_called_with("ha", service=sot.service, json=body)
+
     def test_add_acl(self):
         response = mock.Mock()
         response.body = ''

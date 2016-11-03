@@ -56,6 +56,10 @@ class HighAvailabilityInstance(resource.Resource):
     #: The configuration ID for this instance. *Type: string*
     configuration_id = resource.prop('configuration')
 
+    @classmethod
+    def _get_create_body(cls, attrs):
+        return {'ha': attrs}
+
     def add_acl(self, session, cidr):
         """Add Access Control List (ACL)
 
