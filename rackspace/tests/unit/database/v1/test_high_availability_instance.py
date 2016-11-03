@@ -45,7 +45,10 @@ EXAMPLE = {
         "flavorRef": FLAVOR_REFERENCE,
         "name": "Tyrell"}
     ],
-    "configuration_id": CONFIG_UUID
+    "configuration_id": CONFIG_UUID,
+    "scheduled_backup": {
+        "enabled": True
+    }
 }
 
 
@@ -72,6 +75,7 @@ class TestHA(testtools.TestCase):
         self.assertEqual(EXAMPLE['replicas'], sot.replicas)
         self.assertEqual(EXAMPLE['replica_source'], sot.replica_source)
         self.assertEqual(EXAMPLE['configuration_id'], sot.configuration_id)
+        self.assertEqual(EXAMPLE['scheduled_backup'], sot.scheduled_backup)
 
     def test_create_json_is_overridden(self):
         resp = mock.Mock()
@@ -85,7 +89,7 @@ class TestHA(testtools.TestCase):
         sot.name = 'foo'
         sot.create(sess)
 
-        body = {"ha": {"foo": "name"}}
+        body = {"ha": {"name": "foo"}}
         sess.post.assert_called_with("ha", service=sot.service, json=body)
 
     def test_add_acl(self):

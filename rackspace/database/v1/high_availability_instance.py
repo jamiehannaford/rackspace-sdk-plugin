@@ -55,6 +55,8 @@ class HighAvailabilityInstance(resource.Resource):
     volume = resource.prop('volume', type=dict)
     #: The configuration ID for this instance. *Type: string*
     configuration_id = resource.prop('configuration')
+    #: The status of scheduled backups. *Type: dict*
+    scheduled_backup = resource.prop('scheduled_backup')
 
     @classmethod
     def _get_create_body(cls, attrs):
