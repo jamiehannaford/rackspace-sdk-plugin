@@ -19,8 +19,7 @@ from openstack.database.v1 import user
 from rackspace.database import database_service
 from rackspace.database.v1 import backup
 from rackspace.database.v1 import backup_schedule
-from rackspace.database.v1.high_availability_instance \
-    import HighAvailabilityInstance
+from rackspace.database.v1 import high_availability_instance
 
 
 database.Database.service = database_service.DatabaseService()
@@ -196,7 +195,8 @@ class Proxy(_proxy.Proxy):
                         .high_availability_instance
                         .HighAvailabilityInstance`
         """
-        return self._list(HighAvailabilityInstance, paginated=False, **query)
+        return self._list(high_availability_instance.HighAvailabilityInstance,
+                          paginated=False, **query)
 
     def create_ha_instance(self, **attrs):
         """Create a new high availability instance from attributes
@@ -212,7 +212,8 @@ class Proxy(_proxy.Proxy):
                         .high_availability_instance
                         .HighAvailabilityInstance`
         """
-        return self._create(HighAvailabilityInstance, **attrs)
+        return self._create(
+            high_availability_instance.HighAvailabilityInstance, **attrs)
 
     def delete_ha_instance(self, value, ignore_missing=True):
         """Delete a high availability instance
@@ -229,7 +230,7 @@ class Proxy(_proxy.Proxy):
 
         :returns: ``None``
         """
-        self._delete(HighAvailabilityInstance,
+        self._delete(high_availability_instance.HighAvailabilityInstance,
                      value, ignore_missing=ignore_missing)
 
     def find_ha_instance(self, name_or_id, ignore_missing=True):
@@ -246,7 +247,7 @@ class Proxy(_proxy.Proxy):
                               .high_availability_instance
                               .HighAvailabilityInstance` or None
         """
-        return self._find(HighAvailabilityInstance,
+        return self._find(high_availability_instance.HighAvailabilityInstance,
                           name_or_id, ignore_missing=ignore_missing)
 
     def get_ha_instance(self, value):
@@ -263,7 +264,8 @@ class Proxy(_proxy.Proxy):
         :raises: :class:`~openstack.exceptions.ResourceNotFound`
                  when no resource can be found.
         """
-        return self._get(HighAvailabilityInstance, value)
+        return self._get(high_availability_instance.HighAvailabilityInstance,
+                         value)
 
     def update_ha_instance(self, value, **attrs):
         """Update a high availability instance
@@ -280,7 +282,9 @@ class Proxy(_proxy.Proxy):
                         .high_availability_instance
                         .HighAvailabilityInstance`
         """
-        return self._update(HighAvailabilityInstance, value, **attrs)
+        return self._update(
+            high_availability_instance.HighAvailabilityInstance, value,
+            **attrs)
 
     def resize_ha_instance(self, value, flavor_reference):
         """Update a high availability instance
@@ -294,7 +298,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: None
         """
-        instance = self._get_resource(HighAvailabilityInstance, value)
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
         instance.resize(self.session, flavor_reference)
 
     def resize_volume_ha_instance(self, value, volume_size):
@@ -309,7 +314,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: None
         """
-        instance = self._get_resource(HighAvailabilityInstance, value)
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
         instance.resize_volume(self.session, volume_size)
 
     def restart_ha_instance(self, value):
@@ -322,7 +328,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: None
         """
-        instance = self._get_resource(HighAvailabilityInstance, value)
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
         instance.restart(self.session)
 
     def attach_configuration_ha_instance(self, value, configuration_id):
@@ -336,7 +343,8 @@ class Proxy(_proxy.Proxy):
 
         :returns: None
         """
-        instance = self._get_resource(HighAvailabilityInstance, value)
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
         instance.attach_configuration(self.session, configuration_id)
 
     def detach_configuration_ha_instance(self, value):
@@ -349,5 +357,6 @@ class Proxy(_proxy.Proxy):
 
         :returns: None
         """
-        instance = self._get_resource(HighAvailabilityInstance, value)
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
         instance.detach_configuration(self.session)
