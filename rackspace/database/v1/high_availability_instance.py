@@ -55,6 +55,12 @@ class HighAvailabilityInstance(resource.Resource):
     volume = resource.prop('volume', type=dict)
     #: The configuration ID for this instance. *Type: string*
     configuration_id = resource.prop('configuration')
+    #: The status of scheduled backups. *Type: dict*
+    scheduled_backup = resource.prop('scheduled_backup')
+
+    @classmethod
+    def _get_create_body(cls, attrs):
+        return {'ha': attrs}
 
     def add_acl(self, session, cidr):
         """Add Access Control List (ACL)
@@ -189,3 +195,14 @@ class HighAvailabilityInstance(resource.Resource):
         body = {'resize': {'volume': volume_size}}
         url = utils.urljoin(self.base_path, self.id, 'action')
         session.post(url, service=self.service, json=body)
+
+    def restart(self, session):
+        """Restart the database instance
+
+        :param session: The session to use for making this request.
+        :type session: :class:`~openstack.session.Session`
+        :returns: ``None``
+        """
+        body = {'restart': {}}
+        url = utils.urljoin(self.base_path, self.id, 'action')
+        session.post(url, endpoint_filter=self.service, json=body)

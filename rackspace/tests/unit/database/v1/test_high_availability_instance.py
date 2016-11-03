@@ -45,7 +45,10 @@ EXAMPLE = {
         "flavorRef": FLAVOR_REFERENCE,
         "name": "Tyrell"}
     ],
-    "configuration_id": CONFIG_UUID
+    "configuration_id": CONFIG_UUID,
+    "scheduled_backup": {
+        "enabled": True
+    }
 }
 
 
@@ -72,6 +75,23 @@ class TestHA(testtools.TestCase):
         self.assertEqual(EXAMPLE['replicas'], sot.replicas)
         self.assertEqual(EXAMPLE['replica_source'], sot.replica_source)
         self.assertEqual(EXAMPLE['configuration_id'], sot.configuration_id)
+        self.assertEqual(EXAMPLE['scheduled_backup'], sot.scheduled_backup)
+
+    def test_create_json_is_overridden(self):
+        resp = mock.Mock()
+        resp.json = mock.Mock(return_value={'ha_instance': {}})
+        resp.headers = {'location': 'foo'}
+
+        sess = mock.Mock()
+        sess.post = mock.Mock(return_value=resp)
+
+        sot = high_availability_instance.HighAvailabilityInstance()
+        sot.name = 'foo'
+        sot.create(sess)
+
+        body = {"ha": {"name": "foo"}}
+        sess.post.assert_called_with("ha", endpoint_filter=sot.service,
+                                     json=body)
 
     def test_add_acl(self):
         response = mock.Mock()
@@ -173,3 +193,19 @@ class TestHA(testtools.TestCase):
         body = {'resize': {'volume': VOLUME_SIZE}}
         url = ("ha/%s/action" % sot.id)
         sess.post.assert_called_with(url, service=sot.service, json=body)
+
+    def test_action_restart(self):
+        response = mock.Mock()
+        response.json = mock.Mock(return_value='')
+
+        sess = mock.Mock()
+        sess.post = mock.Mock(return_value=response)
+
+        sot = high_availability_instance.HighAvailabilityInstance(EXAMPLE)
+
+        self.assertIsNone(sot.restart(sess))
+
+        url = ("ha/%s/action" % sot.id)
+        body = {'restart': {}}
+        sess.post.assert_called_with(url, endpoint_filter=sot.service,
+                                     json=body)
