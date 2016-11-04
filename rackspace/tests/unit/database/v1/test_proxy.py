@@ -112,7 +112,7 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
 
     def test_ha_instance_resize_volume(self):
         self._verify2(self._ha_method("resize_volume"),
-                      self.proxy.resize_volume_ha_instance,
+                      self.proxy.resize_ha_instance_volume,
                       method_args=['value', 'volume_size'],
                       method_result=None,
                       expected_args=[self.session, 'volume_size'],
@@ -127,16 +127,16 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
                       expected_result=None)
 
     def test_ha_instance_attach_configuration(self):
-        self._verify2(self._ha_method("attach_configuration"),
-                      self.proxy.attach_configuration_ha_instance,
+        self._verify2(self._ha_method("add_configuration"),
+                      self.proxy.add_configuration_to_ha_instance,
                       method_args=['value', 'configuration_id'],
                       method_result=None,
                       expected_args=[self.session, 'configuration_id'],
                       expected_result=None)
 
     def test_ha_instance_detach_configuration(self):
-        self._verify2(self._ha_method("detach_configuration"),
-                      self.proxy.detach_configuration_ha_instance,
+        self._verify2(self._ha_method("remove_configuration"),
+                      self.proxy.remove_configuration_from_ha_instance,
                       method_args=['value'],
                       method_result=None,
                       expected_args=[self.session],

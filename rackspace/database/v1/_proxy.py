@@ -302,7 +302,7 @@ class Proxy(_proxy.Proxy):
             high_availability_instance.HighAvailabilityInstance, value)
         instance.resize(self.session, flavor_reference)
 
-    def resize_volume_ha_instance(self, value, volume_size):
+    def resize_ha_instance_volume(self, value, volume_size):
         """Update a high availability instance
 
         :param value: Either the id of a high availability instance instance
@@ -332,7 +332,7 @@ class Proxy(_proxy.Proxy):
             high_availability_instance.HighAvailabilityInstance, value)
         instance.restart(self.session)
 
-    def attach_configuration_ha_instance(self, value, configuration_id):
+    def add_configuration_to_ha_instance(self, value, configuration_id):
         """Update a high availability instance
 
         :param value: Either the id of a high availability instance instance
@@ -345,9 +345,9 @@ class Proxy(_proxy.Proxy):
         """
         instance = self._get_resource(
             high_availability_instance.HighAvailabilityInstance, value)
-        instance.attach_configuration(self.session, configuration_id)
+        instance.add_configuration(self.session, configuration_id)
 
-    def detach_configuration_ha_instance(self, value):
+    def remove_configuration_from_ha_instance(self, value):
         """Update a high availability instance
 
         :param value: Either the id of a high availability instance instance
@@ -359,4 +359,4 @@ class Proxy(_proxy.Proxy):
         """
         instance = self._get_resource(
             high_availability_instance.HighAvailabilityInstance, value)
-        instance.detach_configuration(self.session)
+        instance.remove_configuration(self.session)
