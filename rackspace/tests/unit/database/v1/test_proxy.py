@@ -141,3 +141,27 @@ class TestDatabaseProxy(test_proxy_base.TestProxyBase):
                       method_result=None,
                       expected_args=[self.session],
                       expected_result=None)
+
+    def test_ha_instance_get_acls(self):
+        self._verify2(self._ha_method("get_acls"),
+                      self.proxy.get_acls_for_ha_instance,
+                      method_args=['value'],
+                      method_result=[],
+                      expected_args=[self.session],
+                      expected_result=[])
+
+    def test_ha_instance_add_acl(self):
+        self._verify2(self._ha_method("add_acl"),
+                      self.proxy.add_acl_to_ha_instance,
+                      method_args=['value', 'cidr'],
+                      method_result=None,
+                      expected_args=[self.session, 'cidr'],
+                      expected_result=None)
+
+    def test_ha_instance_remove_acl(self):
+        self._verify2(self._ha_method("delete_acl"),
+                      self.proxy.remove_acl_from_ha_instance,
+                      method_args=['value', 'cidr'],
+                      method_result=None,
+                      expected_args=[self.session, 'cidr'],
+                      expected_result=None)

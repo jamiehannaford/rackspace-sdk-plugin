@@ -90,7 +90,7 @@ class HighAvailabilityInstance(resource.Resource):
 
         :param session: The session to use for making this request.
         :type session: :class:`~openstack.session.Session`
-        :returns: ``dict``
+        :returns: ``list``
         """
         url = utils.urljoin(self.base_path, self.id, 'acls')
         resp = session.get(url, service=self.service).body

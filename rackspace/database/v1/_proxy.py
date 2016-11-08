@@ -360,3 +360,47 @@ class Proxy(_proxy.Proxy):
         instance = self._get_resource(
             high_availability_instance.HighAvailabilityInstance, value)
         instance.remove_configuration(self.session)
+
+    def get_acls_for_ha_instance(self, value):
+        """Lists ACL entries for a HA instance group
+
+        :param value: Either the id of a high availability instance instance
+                      or a :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance` instance.
+
+        :returns: ``dict``
+        """
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
+        return instance.get_acls(self.session)
+
+    def add_acl_to_ha_instance(self, value, cidr):
+        """Adds an IPv4 to the ACL list of a HA instance group
+
+        :param value: Either the id of a high availability instance instance
+                      or a :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance` instance.
+        :param cidr: The IP address to whitelist
+
+        :returns: None
+        """
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
+        instance.add_acl(self.session, cidr)
+
+    def remove_acl_from_ha_instance(self, value, cidr):
+        """Removes an IPv4 from the ACL list of a HA instance group
+
+        :param value: Either the id of a high availability instance instance
+                      or a :class:`~rackspace.database.v1
+                                   .high_availability_instance
+                                   .HighAvailabilityInstance` instance.
+        :param cidr: The IP address to remove
+
+        :returns: None
+        """
+        instance = self._get_resource(
+            high_availability_instance.HighAvailabilityInstance, value)
+        instance.delete_acl(self.session, cidr)
